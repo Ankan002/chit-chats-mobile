@@ -1,0 +1,20 @@
+import { StyleSheet, Platform, StatusBar } from "react-native";
+
+const styles = (isDarkMode: Boolean) => {
+  return StyleSheet.create({
+    AndroidSafeArea: {
+      flex: 1,
+      backgroundColor: (isDarkMode) ? "#0B0C15" : "#FAFAFC" ,
+      paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+      paddingHorizontal: 10
+    },
+    LoginSectionContainer: {
+      flexGrow: 1,
+      width: '100%'
+    }
+  });
+};
+
+export const lightStyles = styles(false);
+
+export const darkStyles = styles(true);
