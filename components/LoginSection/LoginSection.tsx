@@ -29,8 +29,8 @@ const LoginSection = () => {
       return;
     }
 
-    setIsAuthenticated(true);
     await AsyncStorage.setItem("auth-token", response.token ?? "");
+    setIsAuthenticated(true);
 
     setIsAuthenticating(false);
   };

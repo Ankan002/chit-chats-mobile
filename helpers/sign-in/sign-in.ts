@@ -9,10 +9,6 @@ export const SignIn = async () => {
         webClientId: Constants.manifest?.extra?.webClientId
     });
 
-    const api = axios.create({
-        baseURL: `${Constants.manifest?.extra?.apiEndpoint}`
-    });
-
     try{
         const {user} = await GoogleSignin.signIn();
 

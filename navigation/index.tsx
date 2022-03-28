@@ -21,6 +21,9 @@ import { isDarkModeAtom } from '../atom';
 import { getLastTheme } from '../helpers/is-dark-mode';
 import LightNavigatorTheme from '../theme/LightNavigatorTheme';
 import DarkNavigatorTheme from '../theme/DarkNavigatorTheme';
+import { userLoadingAtom } from '../atom/userLoadingAtom';
+import { userAtom } from '../atom/userAtom';
+import { fetchUser } from "../helpers/fetch-user";
 
 export default function Navigation() {
 
@@ -65,6 +68,25 @@ function AuthenticationNavigator() {
 }
 
 function RootNavigator() {
+
+  const [isUserLoading, setIsUserLoading] = useRecoilState<boolean>(userLoadingAtom);
+  const [user, setUser] = useRecoilState(userAtom);
+  const [isAuthenticated, setIsAuthenticated] = useRecoilState<boolean>(isAuthenticatedAtom);
+
+  useEffect(() => {
+    const onFetchUser = async() => {
+      const fetchedUser = await fetchUser(isUserLoading, setIsUserLoading);
+      if(!fetchedUser?.success){
+        setIsAuthenticated(false);
+        return;
+      }
+
+      setUser(fetchedUser.user);
+    };
+
+    if(isAuthenticated) onFetchUser();
+  }, [isAuthenticated]);
+
   return (
     <Stack.Navigator>
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />

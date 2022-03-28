@@ -4,6 +4,7 @@ import { lightStyles, darkStyles } from "./styles";
 import { useRecoilValue } from "recoil";
 import { isDarkModeAtom } from "../../atom";
 import { StatusBar } from "expo-status-bar";
+import ChatHeader from "../../components/ChatHeader";
 
 const Home = () => {
   const isDarkMode = useRecoilValue<boolean>(isDarkModeAtom);
@@ -15,11 +16,7 @@ const Home = () => {
       }
     >
       <StatusBar style={ isDarkMode ? "light" : "dark" } />
-      <Text
-        style={isDarkMode ? darkStyles.WelcomeText : lightStyles.WelcomeText}
-      >
-        Home
-      </Text>
+      <ChatHeader isDarkMode={isDarkMode} />
     </SafeAreaView>
   );
 };
