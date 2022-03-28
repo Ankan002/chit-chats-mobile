@@ -12,3 +12,8 @@ web-build/
 
 # macOS
 .DS_Store
+
+.env
+eas.json
+GoogleService-info.json
+GoogleService-info.plist
