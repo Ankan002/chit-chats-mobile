@@ -4,11 +4,14 @@ import { lightStyles, darkStyles } from "./styles";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
-import { useRecoilState } from "recoil";
+import { RecoilState, useRecoilState } from "recoil";
 import { isAuthenticatedAtom } from "../../atom";
 import Constants from "expo-constants";
 import { isDarkModeAtom } from "../../atom";
 import { StatusBar } from "expo-status-bar";
+import SettingsHeader from "../../components/SettingsHeader";
+import { userAtom } from "../../atom/userAtom";
+import { UserType } from "../../types";
 
 const Settings = () => {
   GoogleSignin.configure({
@@ -18,6 +21,7 @@ const Settings = () => {
   const [isAuthenticated, setIsAuthenticated] =
     useRecoilState<boolean>(isAuthenticatedAtom);
   const [isDarkMode, setIsDarkMode] = useRecoilState<boolean>(isDarkModeAtom);
+  const [user, setUser] = useRecoilState<any>(userAtom);
 
   const onSignOutClick = async () => {
     try {
@@ -53,11 +57,12 @@ const Settings = () => {
       }
     >
       <StatusBar style={isDarkMode ? "light" : "dark"} />
-      <Text
-        style={isDarkMode ? darkStyles.WelcomeText : lightStyles.WelcomeText}
-      >
-        Settings
-      </Text>
+      <SettingsHeader
+        isDarkMode={isDarkMode}
+        image={user?.id}
+        name={user.name}
+        username={user.username}
+      />
       <Button title="SignOut" onPress={onSignOutClick} />
       <Button
         title={isDarkMode ? "Change to Light Mode" : "Change to Dark Mode"}
