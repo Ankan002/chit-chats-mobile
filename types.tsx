@@ -38,14 +38,14 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> = Composit
 >;
 
 export type UserType = {
-  id: string;
-  createdAt: string;
-  email: string;
-  image: string;
-  name: string;
-  notification: Array<string | null>;
-  pinnedChats: Array<any>;
-  providerId: string;
-  updatedAt: string;
-  username: string
+  id?: string;
+  createdAt?: string;
+  email?: string;
+  image?: string;
+  name?: string;
+  notification?: Array<string | null>;
+  pinnedChats?: Array<any>;
+  providerId?: string;
+  updatedAt?: string;
+  username?: string
 }

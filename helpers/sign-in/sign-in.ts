@@ -1,7 +1,7 @@
-import {GoogleSignin} from "@react-native-google-signin/google-signin";
+import {GoogleSignin, statusCodes} from "@react-native-google-signin/google-signin";
 import Constants from "expo-constants";
 
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import {getUsername} from "../get-username";
 
 export const SignIn = async () => {
@@ -26,6 +26,11 @@ export const SignIn = async () => {
         };
     }
     catch(error: any){
+        if(statusCodes.SIGN_IN_CANCELLED){
+            return {
+                success: false
+            }
+        }
         return {
             success: false,
             error: JSON.stringify(error?.response?.data)

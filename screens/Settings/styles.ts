@@ -4,11 +4,18 @@ const styles = (isDarkMode: boolean) => {
   return StyleSheet.create({
     AndroidSafeArea: {
       flex: 1,
-      backgroundColor: isDarkMode ? "#0A0911" : "#F6F8FA",
+      backgroundColor: isDarkMode ? "#10111A" : "#F6F8FA",
       paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
     },
-    WelcomeText: {
-      color: isDarkMode ? "#F6F8FA" : "#0A0911"
+    LoadingView: {
+      width: "100%",
+      flex: 1,
+      alignItems: "center",
+      justifyContent: "center"
+    },
+    LoginSection: {
+      flexGrow: 1,
+      width: "100%"
     }
   });
 };

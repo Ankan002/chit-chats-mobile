@@ -48,6 +48,6 @@ export default {
         extra: {
             webClientId: process.env.WEB_CLIENT_ID,
             apiEndpoint: process.env.API_ENDPOINT,
-        },
+        }
     },
 };

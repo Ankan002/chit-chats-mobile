@@ -1,74 +1,63 @@
-import { View, Text, Button, Alert } from "react-native";
+import {
+  View,
+  Text,
+  Button,
+  Alert,
+  SafeAreaView,
+  ActivityIndicator,
+} from "react-native";
 import React from "react";
 import { lightStyles, darkStyles } from "./styles";
 
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { GoogleSignin } from "@react-native-google-signin/google-signin";
-import { RecoilState, useRecoilState } from "recoil";
-import { isAuthenticatedAtom } from "../../atom";
-import Constants from "expo-constants";
+import { useRecoilValue } from "recoil";
 import { isDarkModeAtom } from "../../atom";
 import { StatusBar } from "expo-status-bar";
 import SettingsHeader from "../../components/SettingsHeader";
+import SettingsBody from "../../components/SettingsBody";
 import { userAtom } from "../../atom/userAtom";
 import { UserType } from "../../types";
+import LogoutSection from "../../components/LogoutSection";
+import { userLoadingAtom } from "../../atom";
 
 const Settings = () => {
-  GoogleSignin.configure({
-    webClientId: Constants.manifest?.extra?.webClientId,
-  });
+  const isDarkMode = useRecoilValue<boolean>(isDarkModeAtom);
+  const user = useRecoilValue<UserType>(userAtom);
+  const isUserLoading = useRecoilValue<boolean>(userLoadingAtom);
 
-  const [isAuthenticated, setIsAuthenticated] =
-    useRecoilState<boolean>(isAuthenticatedAtom);
-  const [isDarkMode, setIsDarkMode] = useRecoilState<boolean>(isDarkModeAtom);
-  const [user, setUser] = useRecoilState<any>(userAtom);
-
-  const onSignOutClick = async () => {
-    try {
-      await GoogleSignin.signOut();
-      await AsyncStorage.removeItem("auth-token");
-      setIsAuthenticated(false);
-    } catch (error) {
-      console.log(error);
-      Alert.alert(JSON.stringify(error));
-    }
-  };
-
-  const onThemeChangeClick = async () => {
-    try {
-      if (isDarkMode) {
-        setIsDarkMode(false);
-        await AsyncStorage.setItem("dark-mode", JSON.stringify(false));
-        return;
-      }
-
-      setIsDarkMode(true);
-      await AsyncStorage.setItem("dark-mode", JSON.stringify(true));
-    } catch (error) {
-      console.log(error);
-      Alert.alert(JSON.stringify(error));
-    }
-  };
+  //Used for testing purposes
+  // const loading = true;
 
   return (
-    <View
+    <SafeAreaView
       style={
         isDarkMode ? darkStyles.AndroidSafeArea : lightStyles.AndroidSafeArea
       }
     >
-      <StatusBar style={isDarkMode ? "light" : "dark"} />
-      <SettingsHeader
-        isDarkMode={isDarkMode}
-        image={user?.id}
-        name={user.name}
-        username={user.username}
-      />
-      <Button title="SignOut" onPress={onSignOutClick} />
-      <Button
-        title={isDarkMode ? "Change to Light Mode" : "Change to Dark Mode"}
-        onPress={onThemeChangeClick}
-      />
-    </View>
+      {isUserLoading ? (
+        <View
+          style={isDarkMode ? darkStyles.LoadingView : lightStyles.LoadingView}
+        >
+          <ActivityIndicator size="large" color="#FD6438" />
+        </View>
+      ) : (
+        <>
+          <StatusBar style={isDarkMode ? "light" : "dark"} />
+          <SettingsHeader
+            image={user?.image ?? ""}
+            name={user?.name ?? ""}
+            username={user.username ?? ""}
+          />
+          <SettingsBody />
+          <View
+            style={
+              isDarkMode ? darkStyles.LoginSection : lightStyles.LoginSection
+            }
+          >
+            <LogoutSection />
+          </View>
+        </>
+      )}
+    </SafeAreaView>
   );
 };
 

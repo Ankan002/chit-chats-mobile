@@ -4,7 +4,7 @@ const styles = (isDarkMode: boolean) => {
   return StyleSheet.create({
     AndroidSafeArea: {
       flex: 1,
-      backgroundColor: isDarkMode ? "#0A0911" : "#F6F8FA",
+      backgroundColor: isDarkMode ? "#10111A" : "#F6F8FA",
       paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
     },
     WelcomeText: {

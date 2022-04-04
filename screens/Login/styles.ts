@@ -4,7 +4,7 @@ const styles = (isDarkMode: Boolean) => {
   return StyleSheet.create({
     AndroidSafeArea: {
       flex: 1,
-      backgroundColor: (isDarkMode) ? "#0B0C15" : "#FAFAFC" ,
+      backgroundColor: (isDarkMode) ? "#10111A" : "#FAFAFC" ,
       paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
       paddingHorizontal: 10
     },

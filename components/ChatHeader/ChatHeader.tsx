@@ -27,7 +27,7 @@ const ChatHeader = (props: Props) => {
         }
       >
         <Text style={isDarkMode ? darkStyles.Emoji : lightStyles.Emoji}>
-          😊
+          😃
         </Text>
         {fontsLoaded && (
           <>

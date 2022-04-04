@@ -23,6 +23,11 @@ const LoginSection = () => {
     setIsAuthenticating(true);
     const response = await SignIn();
 
+    if(!response.success && !response.error){
+      setIsAuthenticating(false);
+      return;
+    }
+
     if (!response.success) {
       Alert.alert(response.error ?? "");
       setIsAuthenticating(false);

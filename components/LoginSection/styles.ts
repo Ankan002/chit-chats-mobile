@@ -11,7 +11,7 @@ const styles = (isDarkMode: Boolean) => {
         LoginButton: {
             width: '70%',
             height: '7%',
-            borderRadius: 100,
+            borderRadius: 10,
             padding: 10,
             backgroundColor: (isDarkMode) ? '#FD6438' : '#FD6438',
             flexDirection: 'row',
