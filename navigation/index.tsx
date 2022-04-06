@@ -24,6 +24,7 @@ import DarkNavigatorTheme from '../theme/DarkNavigatorTheme';
 import { userLoadingAtom } from '../atom/userLoadingAtom';
 import { userAtom } from '../atom/userAtom';
 import { fetchUser } from "../helpers/fetch-user";
+import ProfileScreen from '../screens/Profile';
 
 export default function Navigation() {
 
@@ -90,6 +91,7 @@ function RootNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
+      <Stack.Screen name="Profile" component={ProfileScreen} options={{headerShown: false}} />
     </Stack.Navigator>
   );
 };

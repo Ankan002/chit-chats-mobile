@@ -12,7 +12,7 @@ import { lightStyles, darkStyles } from "./styles";
 import { useRecoilValue } from "recoil";
 import { isDarkModeAtom } from "../../atom";
 import { StatusBar } from "expo-status-bar";
-import SettingsHeader from "../../components/SettingsHeader";
+import ProfileHeader from "../../components/ProfileHeader";
 import SettingsBody from "../../components/SettingsBody";
 import { userAtom } from "../../atom/userAtom";
 import { UserType } from "../../types";
@@ -42,7 +42,7 @@ const Settings = () => {
       ) : (
         <>
           <StatusBar style={isDarkMode ? "light" : "dark"} />
-          <SettingsHeader
+          <ProfileHeader
             image={user?.image ?? ""}
             name={user?.name ?? ""}
             username={user.username ?? ""}

@@ -15,7 +15,7 @@ interface Props {
   username: string;
 }
 
-const SettingsHeader = (props: Props) => {
+const ProfileHeader = (props: Props) => {
   const { image, name, username } = props;
   const isDarkMode = useRecoilValue<boolean>(isDarkModeAtom);
   const [fontsLoaded] = useFonts({
@@ -59,4 +59,4 @@ const SettingsHeader = (props: Props) => {
   );
 };
 
-export default SettingsHeader;
+export default ProfileHeader;

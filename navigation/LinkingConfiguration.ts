@@ -16,10 +16,11 @@ const linking: LinkingOptions<RootStackParamList> = {
       Root: {
         screens: {
           Home: '*',
-          Settings: '*'
+          Settings: '*',
         },
       },
-      Login: '*'
+      Login: '*',
+      Profile: '*'
     },
   },
 };
