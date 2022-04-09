@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, Button } from "react-native";
 import React from "react";
 import { lightStyles, darkStyles } from "./styles";
 import { useRecoilValue } from "recoil";
@@ -14,6 +14,8 @@ const SettingsBody = () => {
     >
       <Toggler type="Theme" />
       <SettingsNavigationButton name="My Profile" screenName="Profile" />
+      <SettingsNavigationButton name="Change Username" screenName="UpdateUsername" />
+      <SettingsNavigationButton name="Change Tagline" screenName="UpdateTagline" />
     </View>
   );
 };

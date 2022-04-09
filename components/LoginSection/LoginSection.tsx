@@ -8,6 +8,7 @@ import { Roboto_400Regular, useFonts } from "@expo-google-fonts/roboto";
 import { SignIn } from "../../helpers/sign-in";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { isAuthenticatedAtom } from "../../atom";
+import { toastMessage } from "../../helpers/toast-message";
 
 const LoginSection = () => {
   const isDarkMode = useRecoilValue<boolean>(isDarkModeAtom);
@@ -29,13 +30,15 @@ const LoginSection = () => {
     }
 
     if (!response.success) {
-      Alert.alert(response.error ?? "");
+      // Alert.alert(response.error ?? "");
+      toastMessage("error", "Error Occurred", response?.error);
       setIsAuthenticating(false);
       return;
     }
 
     await AsyncStorage.setItem("auth-token", response.token ?? "");
     setIsAuthenticated(true);
+    toastMessage("success", "Welcome to chits chats", "Logged in Successfully");
 
     setIsAuthenticating(false);
   };

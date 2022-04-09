@@ -20,7 +20,9 @@ const linking: LinkingOptions<RootStackParamList> = {
         },
       },
       Login: '*',
-      Profile: '*'
+      Profile: '*',
+      UpdateUsername: '*',
+      UpdateTagline: '*'
     },
   },
 };

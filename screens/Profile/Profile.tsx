@@ -29,7 +29,7 @@ const Profile = () => {
         isDarkMode ? darkStyles.AndroidSafeArea : lightStyles.AndroidSafeArea
       }
     >
-      <NavigationHeader />
+      <NavigationHeader loading={false} />
       {Object.keys(currentUser).length > 0 && (
         <ProfileHeader
           image={currentUser.image ?? ""}

@@ -25,6 +25,8 @@ import { userLoadingAtom } from '../atom/userLoadingAtom';
 import { userAtom } from '../atom/userAtom';
 import { fetchUser } from "../helpers/fetch-user";
 import ProfileScreen from '../screens/Profile';
+import UpdateUsernameScreen from '../screens/UpdateUsername';
+import UpdateTaglineScreen from '../screens/UpdateTagline';
 
 export default function Navigation() {
 
@@ -92,6 +94,8 @@ function RootNavigator() {
     <Stack.Navigator>
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="Profile" component={ProfileScreen} options={{headerShown: false}} />
+      <Stack.Screen name="UpdateUsername" component={UpdateUsernameScreen} options={{headerShown: false}} />
+      <Stack.Screen name="UpdateTagline" component={UpdateTaglineScreen} options={{headerShown: false}} />
     </Stack.Navigator>
   );
 };

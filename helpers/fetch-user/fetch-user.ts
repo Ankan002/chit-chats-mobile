@@ -1,7 +1,7 @@
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Constants from "expo-constants";
-import { Alert } from "react-native";
+import { toastMessage } from "../toast-message";
 
 export const fetchUser = async(
     userLoading: boolean,
@@ -31,7 +31,7 @@ export const fetchUser = async(
     }
     catch(error: any){
         setUserLoading(false);
-        Alert.alert("Fatal Error", JSON.stringify(error?.response?.data?.error));
+        toastMessage("error", "Fatal Error", "Internal Server Error!!");
         await AsyncStorage.removeItem("auth-token");
         return {
             success: false,

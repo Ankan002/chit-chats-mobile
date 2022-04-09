@@ -17,6 +17,8 @@ export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   Login: undefined;
   Profile: undefined;
+  UpdateUsername: undefined;
+  UpdateTagline: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<
@@ -45,5 +47,6 @@ export type UserType = {
   pinnedChats?: Array<any>;
   providerId?: string;
   updatedAt?: string;
-  username?: string
+  username?: string;
+  tagline?: string;
 }

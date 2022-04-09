@@ -5,6 +5,7 @@ import useCachedResources from './hooks/useCachedResources';
 import Navigation from './navigation';
 
 import {RecoilRoot} from 'recoil';
+import Toast from "react-native-toast-message"
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -17,6 +18,7 @@ export default function App() {
         <SafeAreaProvider>
           <StatusBar style='dark' />
           <Navigation />
+          <Toast />
         </SafeAreaProvider>
       </RecoilRoot>
     );

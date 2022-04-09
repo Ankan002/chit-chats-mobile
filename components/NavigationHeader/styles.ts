@@ -6,7 +6,8 @@ const styles = (isDarkMode: boolean) => {
             width: "100%",
             paddingHorizontal: 20,
             paddingVertical: 5,
-            justifyContent: "center"
+            flexDirection: "row",
+            alignItems: "center"
         },
         BackButton: {
             width: 40,

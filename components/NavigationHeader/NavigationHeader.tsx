@@ -5,12 +5,26 @@ import { useRecoilValue } from "recoil";
 import { isDarkModeAtom } from "../../atom";
 import { Entypo } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/core";
+import { toastMessage } from "../../helpers/toast-message";
 
-const NavigationHeader = () => {
+interface Props {
+  loading: boolean;
+}
+
+const NavigationHeader = (props: Props) => {
+  const { loading } = props;
   const isDarkMode = useRecoilValue<boolean>(isDarkModeAtom);
   const navigation = useNavigation();
 
   const onBackButtonClick = () => {
+    if (loading) {
+      toastMessage(
+        "error",
+        "Hold On ✋",
+        "We are performing the action that you requested!!"
+      );
+      return;
+    }
     if (navigation.canGoBack()) navigation.goBack();
   };
 

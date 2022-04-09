@@ -47,6 +47,7 @@
     "react-native-document-picker": "^8.0.0",
     "react-native-safe-area-context": "3.3.2",
     "react-native-screens": "~3.10.1",
+    "react-native-toast-message": "^2.1.5",
     "react-native-web": "0.17.1",
     "recoil": "^0.6.1"
   },

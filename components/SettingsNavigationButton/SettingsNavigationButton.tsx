@@ -11,7 +11,7 @@ import { useNavigation } from "@react-navigation/core";
 
 interface Props{
     name: string;
-    screenName: "Profile";
+    screenName: "Profile" | "UpdateUsername" | "UpdateTagline";
 }
 
 const SettingsNavigationButton = (props: Props) => {
@@ -24,6 +24,9 @@ const SettingsNavigationButton = (props: Props) => {
 
   const onSettingClick = () => {
     if(screenName === "Profile") navigation.navigate(screenName, {userId: user._id});
+    else{
+      navigation.navigate(screenName);
+    }
   };
 
   return (

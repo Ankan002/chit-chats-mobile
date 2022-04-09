@@ -4,17 +4,15 @@ const styles = (isDarkMode: boolean) => {
     return StyleSheet.create({
         Container: {
             width: "100%",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-            marginTop: 15,
-            paddingRight: 5
+            paddingVertical: 10,
+            justifyContent: "center",
+            alignItems: "center"
         },
-        SettingName: {
-            fontFamily: "Manrope_500Medium",
-            fontSize: 17,
+        HeadingText: {
+            fontFamily: "Manrope_600SemiBold",
+            fontSize: 25,
+            textAlign: "center",
             color: isDarkMode ? "#FAFAFC" : "#131517",
-            fontWeight: "600"
         }
     });
 };

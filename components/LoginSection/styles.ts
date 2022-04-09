@@ -13,7 +13,7 @@ const styles = (isDarkMode: Boolean) => {
             height: '7%',
             borderRadius: 10,
             padding: 10,
-            backgroundColor: (isDarkMode) ? '#FD6438' : '#FD6438',
+            backgroundColor: '#FD6438',
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'center'
