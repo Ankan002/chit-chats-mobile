@@ -8,9 +8,13 @@ const styles = (isDarkMode: boolean) => {
             justifyContent: "center",
             alignItems: "center"
         },
+        ProfilePictureContainer: {
+            width: "40%",
+            height: "50%"
+        },
         ProfilePicture: {
-            width: "40%", 
-            height: "50%", 
+            width: "100%", 
+            height: "100%", 
             resizeMode: "contain",
             borderRadius: 200,
         },

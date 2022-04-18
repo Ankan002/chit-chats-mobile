@@ -16,6 +16,7 @@ const SettingsBody = () => {
       <SettingsNavigationButton name="My Profile" screenName="Profile" />
       <SettingsNavigationButton name="Change Username" screenName="UpdateUsername" />
       <SettingsNavigationButton name="Change Tagline" screenName="UpdateTagline" />
+      <SettingsNavigationButton name="Change Profile Pic" screenName="UpdateProfilePic" />
     </View>
   );
 };

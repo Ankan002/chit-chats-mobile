@@ -9,6 +9,14 @@ const styles = (isDarkMode: boolean) => {
     },
     WelcomeText: {
       color: isDarkMode ? "#F6F8FA" : "#0A0911"
+    },
+    PageSection: {
+      flex: 1,
+      width: "100%"
+    },
+    BodySection: {
+      flexGrow: 1,
+      width: "100%"
     }
   });
 };

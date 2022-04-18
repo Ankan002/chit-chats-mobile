@@ -29,12 +29,14 @@ const ProfileHeader = (props: Props) => {
         isDarkMode ? darkStyles.HeaderContainer : lightStyles.HeaderContainer
       }
     >
-      <Image
-        source={{ uri: image }}
-        style={
-          isDarkMode ? darkStyles.ProfilePicture : lightStyles.ProfilePicture
-        }
-      />
+      <View style={isDarkMode ? darkStyles.ProfilePictureContainer : lightStyles.ProfilePictureContainer}>
+        <Image
+          source={{ uri: image }}
+          style={
+            isDarkMode ? darkStyles.ProfilePicture : lightStyles.ProfilePicture
+          }
+        />
+      </View>
 
       {fontsLoaded && (
         <Text

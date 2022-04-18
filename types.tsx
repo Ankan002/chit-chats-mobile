@@ -19,6 +19,7 @@ export type RootStackParamList = {
   Profile: undefined;
   UpdateUsername: undefined;
   UpdateTagline: undefined;
+  UpdateProfilePic: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<

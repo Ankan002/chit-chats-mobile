@@ -22,7 +22,8 @@ const linking: LinkingOptions<RootStackParamList> = {
       Login: '*',
       Profile: '*',
       UpdateUsername: '*',
-      UpdateTagline: '*'
+      UpdateTagline: '*',
+      UpdateProfilePic: '*'
     },
   },
 };

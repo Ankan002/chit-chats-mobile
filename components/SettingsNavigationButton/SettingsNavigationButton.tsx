@@ -11,7 +11,7 @@ import { useNavigation } from "@react-navigation/core";
 
 interface Props{
     name: string;
-    screenName: "Profile" | "UpdateUsername" | "UpdateTagline";
+    screenName: "Profile" | "UpdateUsername" | "UpdateTagline" | "UpdateProfilePic";
 }
 
 const SettingsNavigationButton = (props: Props) => {

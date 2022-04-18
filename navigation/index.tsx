@@ -27,6 +27,7 @@ import { fetchUser } from "../helpers/fetch-user";
 import ProfileScreen from '../screens/Profile';
 import UpdateUsernameScreen from '../screens/UpdateUsername';
 import UpdateTaglineScreen from '../screens/UpdateTagline';
+import UpdateProfilePicScreen from '../screens/UpdateProfilePic';
 
 export default function Navigation() {
 
@@ -96,6 +97,7 @@ function RootNavigator() {
       <Stack.Screen name="Profile" component={ProfileScreen} options={{headerShown: false}} />
       <Stack.Screen name="UpdateUsername" component={UpdateUsernameScreen} options={{headerShown: false}} />
       <Stack.Screen name="UpdateTagline" component={UpdateTaglineScreen} options={{headerShown: false}} />
+      <Stack.Screen name="UpdateProfilePic" component={UpdateProfilePicScreen} options={{headerShown: false}} />
     </Stack.Navigator>
   );
 };
