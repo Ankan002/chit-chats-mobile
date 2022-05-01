@@ -16,7 +16,7 @@ const Home = () => {
       }
     >
       <StatusBar style={ isDarkMode ? "light" : "dark" } />
-      <ChatHeader isDarkMode={isDarkMode} />
+      <ChatHeader isDarkMode={isDarkMode} chatType="personal" />
     </SafeAreaView>
   );
 };

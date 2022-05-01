@@ -27,7 +27,7 @@ const styles = (isDarkMode: boolean) => {
         NormalText: {
             fontWeight: "500",
             fontSize: 22,
-            color: "#86888A",
+            color: isDarkMode ? "#FAFAFC" : "#131517",
             fontFamily: "Manrope_500Medium"
         }
     });

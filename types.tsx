@@ -20,6 +20,8 @@ export type RootStackParamList = {
   UpdateUsername: undefined;
   UpdateTagline: undefined;
   UpdateProfilePic: undefined;
+  UserSearch: undefined;
+  CreateGroup: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<
@@ -30,6 +32,7 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> = Nati
 export type RootTabParamList = {
   Home: undefined;
   Settings: undefined;
+  Group: undefined;
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<
@@ -50,4 +53,16 @@ export type UserType = {
   updatedAt?: string;
   username?: string;
   tagline?: string;
+}
+
+export type SearchedUserType = {
+  __v?: number,
+  _id?: string,
+  name?: string,
+  username?: string,
+  email?: string,
+  image?: string,
+  tagline?: string,
+  createdAt?: string,
+  updatedAt?: string
 }

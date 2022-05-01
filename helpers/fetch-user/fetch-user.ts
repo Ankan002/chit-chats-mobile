@@ -22,8 +22,6 @@ export const fetchUser = async(
 
         setUserLoading(false);
 
-        console.log(response.data?.user);
-
         return {
             success: response.data?.success,
             user: response.data?.user

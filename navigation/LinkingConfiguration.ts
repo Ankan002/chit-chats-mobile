@@ -17,13 +17,16 @@ const linking: LinkingOptions<RootStackParamList> = {
         screens: {
           Home: '*',
           Settings: '*',
+          Group: '*'
         },
       },
       Login: '*',
       Profile: '*',
       UpdateUsername: '*',
       UpdateTagline: '*',
-      UpdateProfilePic: '*'
+      UpdateProfilePic: '*',
+      UserSearch: '*',
+      CreateGroup: '*'
     },
   },
 };

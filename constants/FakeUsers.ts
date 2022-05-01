@@ -1,0 +1,167 @@
+export const FakeUsers = [
+    {
+        "_id": "1",
+        "name": "Madhuri Bhattacharya",
+        "username": "Gwen",
+        "email": "madhuribhattacharya72@gmail.com",
+        "image": "http://res.cloudinary.com/exponents/image/upload/v1650622939/chit-chats/profile-image/cqaf91lwl3ybq86vrgu4.jpg",
+        "tagline": "Hey! I am using Chit Chats",
+        "createdAt": "2022-04-06T16:29:40.325Z",
+        "updatedAt": "2022-04-22T10:22:32.024Z",
+        "__v": 0
+    },
+    {
+        "_id": "2",
+        "name": "Madhuri Bhattacharya",
+        "username": "Gwen",
+        "email": "madhuribhattacharya72@gmail.com",
+        "image": "http://res.cloudinary.com/exponents/image/upload/v1650622939/chit-chats/profile-image/cqaf91lwl3ybq86vrgu4.jpg",
+        "tagline": "Hey! I am using Chit Chats",
+        "createdAt": "2022-04-06T16:29:40.325Z",
+        "updatedAt": "2022-04-22T10:22:32.024Z",
+        "__v": 0
+    },
+    {
+        "_id": "3",
+        "name": "Madhuri Bhattacharya",
+        "username": "Gwen",
+        "email": "madhuribhattacharya72@gmail.com",
+        "image": "http://res.cloudinary.com/exponents/image/upload/v1650622939/chit-chats/profile-image/cqaf91lwl3ybq86vrgu4.jpg",
+        "tagline": "Hey! I am using Chit Chats",
+        "createdAt": "2022-04-06T16:29:40.325Z",
+        "updatedAt": "2022-04-22T10:22:32.024Z",
+        "__v": 0
+    },
+    {
+        "_id": "4",
+        "name": "Madhuri Bhattacharya",
+        "username": "Gwen",
+        "email": "madhuribhattacharya72@gmail.com",
+        "image": "http://res.cloudinary.com/exponents/image/upload/v1650622939/chit-chats/profile-image/cqaf91lwl3ybq86vrgu4.jpg",
+        "tagline": "Hey! I am using Chit Chats",
+        "createdAt": "2022-04-06T16:29:40.325Z",
+        "updatedAt": "2022-04-22T10:22:32.024Z",
+        "__v": 0
+    },
+    {
+        "_id": "5",
+        "name": "Madhuri Bhattacharya",
+        "username": "Gwen",
+        "email": "madhuribhattacharya72@gmail.com",
+        "image": "http://res.cloudinary.com/exponents/image/upload/v1650622939/chit-chats/profile-image/cqaf91lwl3ybq86vrgu4.jpg",
+        "tagline": "Hey! I am using Chit Chats",
+        "createdAt": "2022-04-06T16:29:40.325Z",
+        "updatedAt": "2022-04-22T10:22:32.024Z",
+        "__v": 0
+    },
+    {
+        "_id": "6",
+        "name": "Madhuri Bhattacharya",
+        "username": "Gwen",
+        "email": "madhuribhattacharya72@gmail.com",
+        "image": "http://res.cloudinary.com/exponents/image/upload/v1650622939/chit-chats/profile-image/cqaf91lwl3ybq86vrgu4.jpg",
+        "tagline": "Hey! I am using Chit Chats",
+        "createdAt": "2022-04-06T16:29:40.325Z",
+        "updatedAt": "2022-04-22T10:22:32.024Z",
+        "__v": 0
+    },
+    {
+        "_id": "7",
+        "name": "Madhuri Bhattacharya",
+        "username": "Gwen",
+        "email": "madhuribhattacharya72@gmail.com",
+        "image": "http://res.cloudinary.com/exponents/image/upload/v1650622939/chit-chats/profile-image/cqaf91lwl3ybq86vrgu4.jpg",
+        "tagline": "Hey! I am using Chit Chats",
+        "createdAt": "2022-04-06T16:29:40.325Z",
+        "updatedAt": "2022-04-22T10:22:32.024Z",
+        "__v": 0
+    },
+    {
+        "_id": "8",
+        "name": "Madhuri Bhattacharya",
+        "username": "Gwen",
+        "email": "madhuribhattacharya72@gmail.com",
+        "image": "http://res.cloudinary.com/exponents/image/upload/v1650622939/chit-chats/profile-image/cqaf91lwl3ybq86vrgu4.jpg",
+        "tagline": "Hey! I am using Chit Chats",
+        "createdAt": "2022-04-06T16:29:40.325Z",
+        "updatedAt": "2022-04-22T10:22:32.024Z",
+        "__v": 0
+    },
+    {
+        "_id": "9",
+        "name": "Madhuri Bhattacharya",
+        "username": "Gwen",
+        "email": "madhuribhattacharya72@gmail.com",
+        "image": "http://res.cloudinary.com/exponents/image/upload/v1650622939/chit-chats/profile-image/cqaf91lwl3ybq86vrgu4.jpg",
+        "tagline": "Hey! I am using Chit Chats",
+        "createdAt": "2022-04-06T16:29:40.325Z",
+        "updatedAt": "2022-04-22T10:22:32.024Z",
+        "__v": 0
+    },
+    {
+        "_id": "10",
+        "name": "Madhuri Bhattacharya",
+        "username": "Gwen",
+        "email": "madhuribhattacharya72@gmail.com",
+        "image": "http://res.cloudinary.com/exponents/image/upload/v1650622939/chit-chats/profile-image/cqaf91lwl3ybq86vrgu4.jpg",
+        "tagline": "Hey! I am using Chit Chats",
+        "createdAt": "2022-04-06T16:29:40.325Z",
+        "updatedAt": "2022-04-22T10:22:32.024Z",
+        "__v": 0
+    },
+    {
+        "_id": "11",
+        "name": "Madhuri Bhattacharya",
+        "username": "Gwen",
+        "email": "madhuribhattacharya72@gmail.com",
+        "image": "http://res.cloudinary.com/exponents/image/upload/v1650622939/chit-chats/profile-image/cqaf91lwl3ybq86vrgu4.jpg",
+        "tagline": "Hey! I am using Chit Chats",
+        "createdAt": "2022-04-06T16:29:40.325Z",
+        "updatedAt": "2022-04-22T10:22:32.024Z",
+        "__v": 0
+    },
+    {
+        "_id": "12",
+        "name": "Madhuri Bhattacharya",
+        "username": "Gwen",
+        "email": "madhuribhattacharya72@gmail.com",
+        "image": "http://res.cloudinary.com/exponents/image/upload/v1650622939/chit-chats/profile-image/cqaf91lwl3ybq86vrgu4.jpg",
+        "tagline": "Hey! I am using Chit Chats",
+        "createdAt": "2022-04-06T16:29:40.325Z",
+        "updatedAt": "2022-04-22T10:22:32.024Z",
+        "__v": 0
+    },
+    {
+        "_id": "13",
+        "name": "Madhuri Bhattacharya",
+        "username": "Gwen",
+        "email": "madhuribhattacharya72@gmail.com",
+        "image": "http://res.cloudinary.com/exponents/image/upload/v1650622939/chit-chats/profile-image/cqaf91lwl3ybq86vrgu4.jpg",
+        "tagline": "Hey! I am using Chit Chats",
+        "createdAt": "2022-04-06T16:29:40.325Z",
+        "updatedAt": "2022-04-22T10:22:32.024Z",
+        "__v": 0
+    },
+    {
+        "_id": "14",
+        "name": "Madhuri Bhattacharya",
+        "username": "Gwen",
+        "email": "madhuribhattacharya72@gmail.com",
+        "image": "http://res.cloudinary.com/exponents/image/upload/v1650622939/chit-chats/profile-image/cqaf91lwl3ybq86vrgu4.jpg",
+        "tagline": "Hey! I am using Chit Chats",
+        "createdAt": "2022-04-06T16:29:40.325Z",
+        "updatedAt": "2022-04-22T10:22:32.024Z",
+        "__v": 0
+    },
+    {
+        "_id": "15",
+        "name": "Madhuri Bhattacharya",
+        "username": "Gwen",
+        "email": "madhuribhattacharya72@gmail.com",
+        "image": "http://res.cloudinary.com/exponents/image/upload/v1650622939/chit-chats/profile-image/cqaf91lwl3ybq86vrgu4.jpg",
+        "tagline": "Hey! I am using Chit Chats",
+        "createdAt": "2022-04-06T16:29:40.325Z",
+        "updatedAt": "2022-04-22T10:22:32.024Z",
+        "__v": 0
+    },
+]

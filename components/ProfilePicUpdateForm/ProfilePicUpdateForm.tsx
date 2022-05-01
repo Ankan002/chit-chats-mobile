@@ -14,6 +14,7 @@ import {
 import DocumentPicker, {
   DocumentPickerResponse,
 } from "react-native-document-picker";
+import ImageThumbnailPreview from "../ImageThumbnailPreview";
 import { toastMessage } from "../../helpers/toast-message";
 import { darkStyles, lightStyles } from "./styles";
 import { useNavigation } from "@react-navigation/native";
@@ -136,6 +137,12 @@ const ProfilePicUpdateForm = (props: Props) => {
           </Pressable>
         </View>
       )}
+
+      {
+        currentImage && (
+          <ImageThumbnailPreview type="non-editable" image={currentImage} />
+        )
+      }
 
       <View
         style={

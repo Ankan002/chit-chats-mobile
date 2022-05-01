@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 const styles = (isDarkMode: boolean) => {
     return StyleSheet.create({
         BodyContainer: {
-            flex: 1,
+            flexShrink: 1,
             width: "100%",
             paddingHorizontal: 15,
             paddingVertical: 2
@@ -21,17 +21,16 @@ const styles = (isDarkMode: boolean) => {
             borderWidth: 1,
             borderColor: isDarkMode ? "#F6F8FA" : "#0A0911",
             color: "#FD6438",
-            paddingHorizontal: 15,
+            paddingHorizontal: 10,
             marginTop: 10,
             borderRadius: 10,
             backgroundColor: isDarkMode ? "#08070C" : "#FFFFFF"
         },
         ButtonContainer: {
-            flex: 1,
+            flexGrow: 1,
             width: "100%",
             justifyContent: "flex-end",
             alignItems: "center",
-            paddingBottom: 30,
             marginTop: 40
         },
         ConnectButton: {

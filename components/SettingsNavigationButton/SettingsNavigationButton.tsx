@@ -23,7 +23,7 @@ const SettingsNavigationButton = (props: Props) => {
   const navigation = useNavigation<any>();
 
   const onSettingClick = () => {
-    if(screenName === "Profile") navigation.navigate(screenName, {userId: user._id});
+    if(screenName === "Profile") navigation.navigate(screenName, {user});
     else{
       navigation.navigate(screenName);
     }

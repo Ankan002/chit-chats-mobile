@@ -27,7 +27,7 @@ const styles = (isDarkMode: boolean) => {
         },
         ImageContainer: {
             width: "100%",
-            height: "50%",
+            height: "40%",
             alignItems: "center",
             justifyContent: "center",
             padding: 20,

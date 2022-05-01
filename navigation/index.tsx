@@ -4,12 +4,13 @@
  *
  */
 import { Ionicons } from '@expo/vector-icons'; 
+import { FontAwesome } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React, {useEffect} from 'react';
 
-import { RootStackParamList, RootTabParamList } from '../types';
+import { RootStackParamList, RootTabParamList, SearchedUserType, UserType } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import HomeScreen from '../screens/Home';
 import SettingsScreen from '../screens/Settings';
@@ -28,6 +29,9 @@ import ProfileScreen from '../screens/Profile';
 import UpdateUsernameScreen from '../screens/UpdateUsername';
 import UpdateTaglineScreen from '../screens/UpdateTagline';
 import UpdateProfilePicScreen from '../screens/UpdateProfilePic';
+import GroupScreen from "../screens/Group";
+import UserSearchScreen from '../screens/UserSearch';
+import CreateGroupScreen from "../screens/CreateGroup";
 
 export default function Navigation() {
 
@@ -74,7 +78,7 @@ function AuthenticationNavigator() {
 function RootNavigator() {
 
   const [isUserLoading, setIsUserLoading] = useRecoilState<boolean>(userLoadingAtom);
-  const [user, setUser] = useRecoilState(userAtom);
+  const [user, setUser] = useRecoilState<UserType>(userAtom);
   const [isAuthenticated, setIsAuthenticated] = useRecoilState<boolean>(isAuthenticatedAtom);
 
   useEffect(() => {
@@ -98,6 +102,8 @@ function RootNavigator() {
       <Stack.Screen name="UpdateUsername" component={UpdateUsernameScreen} options={{headerShown: false}} />
       <Stack.Screen name="UpdateTagline" component={UpdateTaglineScreen} options={{headerShown: false}} />
       <Stack.Screen name="UpdateProfilePic" component={UpdateProfilePicScreen} options={{headerShown: false}} />
+      <Stack.Screen name="UserSearch" component={UserSearchScreen} options={{headerShown: false}} />
+      <Stack.Screen name="CreateGroup" component={CreateGroupScreen} options={{headerShown: false}} />
     </Stack.Navigator>
   );
 };
@@ -120,6 +126,15 @@ function BottomTabNavigator() {
         options={{
           title: 'Home',
           tabBarIcon: ({ color }) => <Ionicons name="chatbox-ellipses-outline" size={30} color={color} />,
+          headerShown: false
+        }}
+      />
+      <BottomTab.Screen
+        name="Group"
+        component={GroupScreen}
+        options={{
+          title: 'Group',
+          tabBarIcon: ({ color }) => <FontAwesome name="group" size={30} color={color} />,
           headerShown: false
         }}
       />

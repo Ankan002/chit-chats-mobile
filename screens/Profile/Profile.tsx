@@ -13,18 +13,18 @@ import ProfileBody from "../../components/ProfileBody";
 const Profile = () => {
   const isDarkMode = useRecoilValue<boolean>(isDarkModeAtom);
   const route = useRoute<any>();
-  const { userId } = route.params;
+  const { user } = route.params;
 
   const loggedInUser = useRecoilValue<UserType>(userAtom);
   const [currentUser, setCurrentUser] = useState<UserType>({});
 
   useEffect(() => {
-    if (!userId) return;
+    if (!user) return;
 
-    if (userId === loggedInUser._id) setCurrentUser(loggedInUser);
+    setCurrentUser(user);
 
     //TODO: Perform loading of user and show activity indicator if the user is not the same
-  }, [userId]);
+  }, [user]);
 
   return (
     <SafeAreaView
