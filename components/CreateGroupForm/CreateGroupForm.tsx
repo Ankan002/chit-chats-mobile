@@ -1,38 +1,28 @@
-import {
-  View,
-  Text,
-  ScrollView,
-  TextInput,
-  Image,
-  Pressable,
-  Modal,
-  Button,
-} from "react-native";
+import { View, Text, TextInput, FlatList, Pressable, ActivityIndicator } from "react-native";
 import React, { useState } from "react";
 import { darkStyles, lightStyles } from "./styles";
 import { useRecoilValue } from "recoil";
 import { isDarkModeAtom } from "../../atom/isDarkModeAtom";
-import { useFonts, Manrope_500Medium } from "@expo-google-fonts/manrope";
+import { useFonts, Manrope_500Medium, Manrope_700Bold } from "@expo-google-fonts/manrope";
 import { FiraCode_500Medium } from "@expo-google-fonts/fira-code";
-import DocumentPicker, {
-  DocumentPickerResponse,
-} from "react-native-document-picker";
+import { DocumentPickerResponse } from "react-native-document-picker";
 import { SearchedUserType } from "../../types";
-import { FontAwesome } from "@expo/vector-icons";
-import { Feather } from "@expo/vector-icons";
-import { toastMessage } from "../../helpers/toast-message";
-import SearchUser from "../SearchUser";
-import ModalNavigationHeader from "../ModalNavigationHeader";
 import ModalTriggerButton from "../ModalTriggerButton/ModalTriggerButton";
-import TitleHeader from "../TitleHeader";
 import ImageThumbnailPreview from "../ImageThumbnailPreview/ImageThumbnailPreview";
+import ImagePickerModal from "../ImagePickerModal/ImagePickerModal";
+import PickGroupUserModal from "../PickGroupUserModal/PickGroupUserModal";
+import SelectedGroupUser from "../SelectedGroupUser";
 
-//TODO: Extract modals into their own components
+interface FlatListProps {
+  index: number;
+  item: SearchedUserType;
+}
 
 const CreateGroup = () => {
   const [fontsLoaded] = useFonts({
     Manrope_500Medium,
     FiraCode_500Medium,
+    Manrope_700Bold
   });
 
   const isDarkMode = useRecoilValue<boolean>(isDarkModeAtom);
@@ -45,24 +35,17 @@ const CreateGroup = () => {
     useState<boolean>(false);
   const [selectImageModalVisible, setSelectImageModalVisible] =
     useState<boolean>(false);
+  const [selectedUserIdSet, setSelectedUserIdSet] = useState<Set<string>>(
+    new Set()
+  );
+  const [selectedUsers, setSelectedUser] = useState<Array<SearchedUserType>>(
+    []
+  );
+  const [isCreating, setIsCreating] = useState<boolean>(false);
 
-  const onImageSelect = async () => {
-    try {
-      const file = await DocumentPicker.pickSingle({
-        type: [DocumentPicker.types.images],
-      });
+  const onCreateClick = () => {
 
-      setCurrentImage(file);
-    } catch (error) {
-      if (DocumentPicker.isCancel(error)) return;
-      toastMessage("error", "Fatal Error", `${error}`);
-      return;
-    }
-  };
-
-  const onRemoveImageClick = () => {
-    setCurrentImage(null);
-  };
+  }
 
   return (
     <View
@@ -86,6 +69,64 @@ const CreateGroup = () => {
         />
       )}
 
+      {fontsLoaded && (
+        <Text style={isDarkMode ? darkStyles.LabelText : lightStyles.LabelText}>
+          Selected Users
+        </Text>
+      )}
+
+      <View
+        style={
+          isDarkMode
+            ? darkStyles.SelectedUsersContainer
+            : lightStyles.SelectedUsersContainer
+        }
+      >
+        {selectedUsers.length <= 0 ? (
+          <View
+            style={
+              isDarkMode
+                ? darkStyles.EmptySelectedUsersContainer
+                : lightStyles.EmptySelectedUsersContainer
+            }
+          >
+            {fontsLoaded && (
+              <Text
+                style={
+                  isDarkMode
+                    ? darkStyles.EmptySelectedUsersText
+                    : lightStyles.EmptySelectedUsersText
+                }
+              >
+                No users selected
+              </Text>
+            )}
+          </View>
+        ) : (
+          <FlatList
+            data={selectedUsers}
+            renderItem={({ item }: FlatListProps) => (
+              <SelectedGroupUser
+                user={item}
+                selectedUsers={selectedUsers}
+                setSelectedUsers={setSelectedUser}
+                selectedUserIdSet={selectedUserIdSet}
+                setSelectedUserIdSet={setSelectedUserIdSet}
+              />
+            )}
+            keyExtractor={(item: SearchedUserType) => item._id ?? ""}
+            horizontal={true}
+            disableScrollViewPanResponder={true}
+            showsHorizontalScrollIndicator={false}
+            style={
+              isDarkMode
+                ? darkStyles.SelectedUsersFlatList
+                : lightStyles.SelectedUsersFlatList
+            }
+          />
+        )}
+      </View>
+
       <ModalTriggerButton
         title="Add more friends"
         setModalVisibility={setSelectUserModalVisible}
@@ -107,118 +148,58 @@ const CreateGroup = () => {
         />
       )}
 
-      <Modal
-        animationType="slide"
-        transparent={false}
-        visible={selectImageModalVisible}
-        onRequestClose={() => setSelectImageModalVisible(false)}
+      <View
+        style={
+          isDarkMode
+            ? darkStyles.CreateGroupButtonContainer
+            : lightStyles.CreateGroupButtonContainer
+        }
       >
-        <View style={isDarkMode ? darkStyles.Modal : lightStyles.Modal}>
-          <ModalNavigationHeader
-            setModalVisibility={setSelectImageModalVisible}
-          />
-          <TitleHeader title="Select Image" />
-          <View
-            style={
-              isDarkMode
-                ? darkStyles.MainImageContainer
-                : lightStyles.MainImageContainer
-            }
-          >
-            {currentImage ? (
-              <Pressable
-                style={
-                  isDarkMode
-                    ? darkStyles.ImageContainer
-                    : lightStyles.ImageContainer
-                }
-                onPress={onImageSelect}
-              >
-                <Image
-                  source={{ uri: currentImage.uri }}
-                  style={
-                    isDarkMode ? darkStyles.GroupImage : lightStyles.GroupImage
-                  }
-                />
-              </Pressable>
-            ) : (
-              <Pressable
-                style={
-                  isDarkMode
-                    ? darkStyles.EmptyImageContainer
-                    : lightStyles.EmptyImageContainer
-                }
-                onPress={onImageSelect}
-              >
-                <FontAwesome
-                  name="image"
-                  size={90}
-                  color={isDarkMode ? "#F6F8FA" : "#0A0911"}
-                />
-                {fontsLoaded && (
-                  <Text
-                    style={
-                      isDarkMode
-                        ? darkStyles.EmptyImageContainerText
-                        : lightStyles.EmptyImageContainerText
-                    }
-                  >
-                    Pick New Group Picture
-                  </Text>
-                )}
-              </Pressable>
-            )}
-          </View>
-
-          <View
-            style={
-              isDarkMode
-                ? darkStyles.DeleteImageButtonContainer
-                : lightStyles.DeleteImageButtonContainer
-            }
-          >
-            {currentImage && (
-              <Pressable
-                style={
-                  isDarkMode
-                    ? darkStyles.DeleteImageButton
-                    : lightStyles.DeleteImageButton
-                }
-                onPress={onRemoveImageClick}
-              >
-                <Feather name="trash-2" size={26} color="#FD6438" />
-              </Pressable>
-            )}
-          </View>
-        </View>
-      </Modal>
-
-      <Modal
-        animationType="slide"
-        transparent={false}
-        visible={selectUserModalVisible}
-        onRequestClose={() => setSelectUserModalVisible(false)}
-      >
-        <View style={isDarkMode ? darkStyles.Modal : lightStyles.Modal}>
-          <ModalNavigationHeader
-            setModalVisibility={setSelectUserModalVisible}
-          />
-          <TitleHeader title="Select Users" />
-          <View
-            style={
-              isDarkMode
-                ? darkStyles.SearchUserModalContainer
-                : lightStyles.SearchUserModalContainer
-            }
-          >
-            <SearchUser
-              type="group"
-              searchResult={searchResult}
-              setSearchResult={setSearchResult}
+        <Pressable
+          style={
+            isDarkMode ? darkStyles.CreateGroupButton : lightStyles.CreateGroupButton
+          }
+          onPress={onCreateClick}
+        >
+          {isCreating ? (
+            <ActivityIndicator
+              size="large"
+              color={isDarkMode ? "#0A0911" : "#F6F8FA"}
             />
-          </View>
-        </View>
-      </Modal>
+          ) : (
+            <>
+              {fontsLoaded && (
+                <Text
+                  style={
+                    isDarkMode ? darkStyles.CreateGroupText : lightStyles.CreateGroupText
+                  }
+                >
+                  Create Group
+                </Text>
+              )}
+            </>
+          )}
+        </Pressable>
+      </View>
+
+      <ImagePickerModal
+        isModalVisible={selectImageModalVisible}
+        setModalVisibility={setSelectImageModalVisible}
+        currentImage={currentImage}
+        setCurrentImage={setCurrentImage}
+      />
+
+      <PickGroupUserModal
+        action="create"
+        setSearchResult={setSearchResult}
+        searchResult={searchResult}
+        isModalVisible={selectUserModalVisible}
+        setIsModalVisible={setSelectUserModalVisible}
+        selectedUserIdSet={selectedUserIdSet}
+        setSelectedUserIdSet={setSelectedUserIdSet}
+        setSelectedUsers={setSelectedUser}
+        selectedUsers={selectedUsers}
+      />
     </View>
   );
 };

@@ -40,6 +40,12 @@ const styles = (isDarkMode: boolean) => {
             fontSize: 14,
             fontFamily: "FiraCode_400Regular",
             marginTop: 4
+        },
+        SelectedBorder: {
+            borderColor: "rgba(8, 205, 146, 0.5)"
+        },
+        SelectedText: {
+            color: "#08CD92"
         }
     });
 }
