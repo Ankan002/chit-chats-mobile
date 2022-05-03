@@ -7,7 +7,6 @@ const styles = (isDarkMode: boolean) => {
             height: 80,
             flexDirection: "row",
             marginTop: 25,
-            marginBottom: 10,
             alignItems: "center"
         },
         EmptyContainer: {

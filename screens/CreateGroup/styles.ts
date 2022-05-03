@@ -8,7 +8,7 @@ const styles = (isDarkMode: boolean) => {
       paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
     },
     FormContainer: {
-      flexShrink: 1,
+      flexGrow: 1,
       width: "100%"
     }
   });

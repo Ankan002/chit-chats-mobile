@@ -6,7 +6,7 @@ import {
   FlatList,
   Image,
   ActivityIndicator,
-  SectionList
+  SectionList,
 } from "react-native";
 import React, { useState } from "react";
 import { useRecoilValue } from "recoil";
@@ -18,19 +18,25 @@ import { Feather } from "@expo/vector-icons";
 import { SearchedUserType } from "../../types";
 import { toastMessage } from "../../helpers/toast-message";
 import { searchUser } from "../../helpers/search-users";
-import { FakeUsers } from "../../constants/FakeUsers";
 
 const EmptyImage = require("../../assets/images/empty_search.png");
 
-type Props = {
-  type: "personal";
-  searchResult: Array<SearchedUserType>;
-  setSearchResult: Function;
-} | {
-  type: "group";
-  searchResult: Array<SearchedUserType>;
-  setSearchResult: Function;
-}
+type Props =
+  | {
+      type: "personal";
+      searchResult: Array<SearchedUserType>;
+      setSearchResult: Function;
+    }
+  | {
+      type: "group";
+      searchResult: Array<SearchedUserType>;
+      setSearchResult: Function;
+      action: "create" | "update" | "search";
+      selectedUserIdSet: Set<string>;
+      setSelectedUserIdSet: Function;
+      setSelectedUsers: Function;
+      selectedUsers: Array<SearchedUserType>;
+    };
 
 interface FlatListProps {
   index: number;
@@ -47,37 +53,41 @@ const SearchUser = (props: Props) => {
   );
   const [isSearching, setIsSearching] = useState<boolean>(false);
 
-  const onSearchClick = async() => {
-    if(keyword.length < 1){
-      toastMessage("error", "Length Error", "Please Enter a valid keyword to search for");
+  const onSearchClick = async () => {
+    if (keyword.length < 1) {
+      toastMessage(
+        "error",
+        "Length Error",
+        "Please Enter a valid keyword to search for"
+      );
       return;
     }
 
     const response = await searchUser(isSearching, setIsSearching, keyword);
 
-    console.log(response)
+    console.log(response);
 
-    if(response?.success === false){
+    if (response?.success === false) {
       toastMessage("error", "Oops!!", response.error);
       return;
     }
 
-    if(props.type === "personal"){
+    if (props.type === "personal") {
       props.setSearchResult(response?.users);
 
-      if(response?.users.length < 1){
+      if (response?.users.length < 1) {
         setEmptyStatement("No users found with that keyword");
       }
     }
 
-    if(props.type === "group"){
+    if (props.type === "group") {
       props.setSearchResult(response?.users);
 
-      if(response?.users.length < 1){
+      if (response?.users.length < 1) {
         setEmptyStatement("No users found with that keyword");
       }
     }
-  } 
+  };
 
   return (
     <View
@@ -104,7 +114,7 @@ const SearchUser = (props: Props) => {
             onChangeText={(text) => setKeyword(text)}
             value={keyword}
             numberOfLines={1}
-            scrollEnabled = {false}
+            scrollEnabled={false}
           />
         )}
 
@@ -130,14 +140,38 @@ const SearchUser = (props: Props) => {
       </View>
 
       {props.searchResult.length > 0 ? (
-        <FlatList
-          data={props.searchResult}
-          renderItem={({ item }: FlatListProps) => (
-            <UserSearchResult type="personal" user={item} />
+        <>
+          {props.type === "personal" ? (
+            <FlatList
+              data={props.searchResult}
+              renderItem={({ item }: FlatListProps) => (
+                <UserSearchResult type="personal" user={item} />
+              )}
+              disableScrollViewPanResponder={true}
+              showsHorizontalScrollIndicator={false}
+              keyExtractor={(item: SearchedUserType) => item?._id ?? ""}
+              style={isDarkMode ? darkStyles.UserList : lightStyles.UserList}
+            />
+          ) : (
+            <FlatList
+              data={props.searchResult}
+              renderItem={({ item }: FlatListProps) => (
+                <UserSearchResult
+                  type="group"
+                  user={item}
+                  selectedUserIdSet={props.selectedUserIdSet}
+                  setSelectedUserIdSet={props.setSelectedUserIdSet}
+                  setSelectedUsers={props.setSelectedUsers}
+                  selectedUsers={props.selectedUsers}
+                />
+              )}
+              disableScrollViewPanResponder={true}
+              showsVerticalScrollIndicator={false}
+              keyExtractor={(item: SearchedUserType) => item?._id ?? ""}
+              style={isDarkMode ? darkStyles.UserList : lightStyles.UserList}
+            />
           )}
-          keyExtractor={(item: SearchedUserType) => item?._id ?? ""}
-          style={isDarkMode ? darkStyles.UserList : lightStyles.UserList}
-        />
+        </>
       ) : (
         <View
           style={
