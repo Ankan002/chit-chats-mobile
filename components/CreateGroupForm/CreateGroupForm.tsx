@@ -1,17 +1,21 @@
 import { View, Text, TextInput, FlatList, Pressable, ActivityIndicator } from "react-native";
 import React, { useState } from "react";
 import { darkStyles, lightStyles } from "./styles";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useRecoilState } from "recoil";
 import { isDarkModeAtom } from "../../atom/isDarkModeAtom";
 import { useFonts, Manrope_500Medium, Manrope_700Bold } from "@expo-google-fonts/manrope";
 import { FiraCode_500Medium } from "@expo-google-fonts/fira-code";
 import { DocumentPickerResponse } from "react-native-document-picker";
-import { SearchedUserType } from "../../types";
+import { SearchedUserType, UserType, GroupChatType } from "../../types";
 import ModalTriggerButton from "../ModalTriggerButton/ModalTriggerButton";
 import ImageThumbnailPreview from "../ImageThumbnailPreview/ImageThumbnailPreview";
 import ImagePickerModal from "../ImagePickerModal/ImagePickerModal";
 import PickGroupUserModal from "../PickGroupUserModal/PickGroupUserModal";
 import SelectedGroupUser from "../SelectedGroupUser";
+import { createGroup } from "../../helpers/create-group";
+import { toastMessage } from "../../helpers/toast-message";
+import { userAtom } from "../../atom/userAtom";
+import { groupChatsAtom } from "../../atom/groupChatsAtom";
 
 interface FlatListProps {
   index: number;
@@ -38,13 +42,59 @@ const CreateGroup = () => {
   const [selectedUserIdSet, setSelectedUserIdSet] = useState<Set<string>>(
     new Set()
   );
-  const [selectedUsers, setSelectedUser] = useState<Array<SearchedUserType>>(
+  const [selectedUsers, setSelectedUsers] = useState<Array<SearchedUserType>>(
     []
   );
   const [isCreating, setIsCreating] = useState<boolean>(false);
+  const loggedInUser = useRecoilValue<UserType>(userAtom);
+  const [groupChats, setGroupChats] = useRecoilState<Array<GroupChatType>>(groupChatsAtom);
 
-  const onCreateClick = () => {
+  const onCreateClick = async() => {
+    const response = await createGroup(isCreating, setIsCreating, currentImage, groupName, [...selectedUserIdSet]);
 
+    console.log(response);
+
+    if(!response.success){
+      toastMessage("error", "Error Occurred", response.error);
+      return;
+    }
+
+    const group = response.group;
+
+    let updatedGroup = {
+      ...group,
+      users: [{
+        __v: loggedInUser.__v,
+        _id: loggedInUser._id,
+        name: loggedInUser.name,
+        email: loggedInUser.email,
+        username: loggedInUser.username,
+        image: loggedInUser.image,
+        tagline: loggedInUser.tagline,
+        updatedAt: loggedInUser.updatedAt,
+        createdAt: loggedInUser.createdAt
+      }, ...selectedUsers],
+      groupAdmin: {
+        __v: loggedInUser.__v,
+        _id: loggedInUser._id,
+        name: loggedInUser.name,
+        email: loggedInUser.email,
+        username: loggedInUser.username,
+        image: loggedInUser.image,
+        tagline: loggedInUser.tagline,
+        updatedAt: loggedInUser.updatedAt,
+        createdAt: loggedInUser.createdAt
+      }
+    };
+
+    setGroupChats([updatedGroup, ...groupChats]);
+
+
+    //TODO: CleanUp here and also redirect to the chat screen
+    setGroupName("");
+    setCurrentImage(null);
+    setSelectedUsers([]);
+    setSelectedUserIdSet(new Set());
   }
 
   return (
@@ -109,7 +159,7 @@ const CreateGroup = () => {
               <SelectedGroupUser
                 user={item}
                 selectedUsers={selectedUsers}
-                setSelectedUsers={setSelectedUser}
+                setSelectedUsers={setSelectedUsers}
                 selectedUserIdSet={selectedUserIdSet}
                 setSelectedUserIdSet={setSelectedUserIdSet}
               />
@@ -197,7 +247,7 @@ const CreateGroup = () => {
         setIsModalVisible={setSelectUserModalVisible}
         selectedUserIdSet={selectedUserIdSet}
         setSelectedUserIdSet={setSelectedUserIdSet}
-        setSelectedUsers={setSelectedUser}
+        setSelectedUsers={setSelectedUsers}
         selectedUsers={selectedUsers}
       />
     </View>

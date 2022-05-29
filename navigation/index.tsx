@@ -1,8 +1,3 @@
-/**
- * If you are not familiar with React Navigation, refer to the "Fundamentals" guide:
- * https://reactnavigation.org/docs/getting-started
- *
- */
 import { Ionicons } from '@expo/vector-icons'; 
 import { FontAwesome } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -10,7 +5,7 @@ import { NavigationContainer, } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React, {useEffect} from 'react';
 
-import { RootStackParamList, RootTabParamList, SearchedUserType, UserType } from '../types';
+import { GroupChatType, RootStackParamList, RootTabParamList, SearchedUserType, SingleChatType, UserType } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import HomeScreen from '../screens/Home';
 import SettingsScreen from '../screens/Settings';
@@ -32,6 +27,14 @@ import UpdateProfilePicScreen from '../screens/UpdateProfilePic';
 import GroupScreen from "../screens/Group";
 import UserSearchScreen from '../screens/UserSearch';
 import CreateGroupScreen from "../screens/CreateGroup";
+import SingleChatScreen from '../screens/SingleChat';
+import GroupChatScreen from "../screens/GroupChat";
+import { chatsLoadingAtom } from "../atom/chatsLoadingAtom";
+import { singleChatsAtom } from "../atom/singleChatsAtom";
+import { groupChatsAtom } from "../atom/groupChatsAtom";
+import { fetchChats } from "../helpers/fetch-chats";
+import { toastMessage } from '../helpers/toast-message/toast-message';
+import { serializeChats } from "../helpers/serialize-chats";
 
 export default function Navigation() {
 
@@ -80,6 +83,9 @@ function RootNavigator() {
   const [isUserLoading, setIsUserLoading] = useRecoilState<boolean>(userLoadingAtom);
   const [user, setUser] = useRecoilState<UserType>(userAtom);
   const [isAuthenticated, setIsAuthenticated] = useRecoilState<boolean>(isAuthenticatedAtom);
+  const [isChatsLoading, setIsChatsLoading] = useRecoilState<boolean>(chatsLoadingAtom);
+  const [singleChats, setSingleChats] = useRecoilState<Array<SingleChatType>>(singleChatsAtom);
+  const [groupChats, setGroupChats] = useRecoilState<Array<GroupChatType>>(groupChatsAtom);
 
   useEffect(() => {
     const onFetchUser = async() => {
@@ -92,7 +98,21 @@ function RootNavigator() {
       setUser(fetchedUser.user);
     };
 
-    if(isAuthenticated) onFetchUser();
+    const onFetchChats = async() => {
+      const response = await fetchChats(isChatsLoading, setIsChatsLoading);
+
+      if(!response.success){
+        toastMessage("error", "Error Occurred", response.error);
+        return
+      }
+
+      serializeChats(response.chats, setSingleChats, setGroupChats, isChatsLoading, setIsChatsLoading);
+    }
+ 
+    if(isAuthenticated) {
+      onFetchUser();
+      onFetchChats();
+    }
   }, [isAuthenticated]);
 
   return (
@@ -104,6 +124,8 @@ function RootNavigator() {
       <Stack.Screen name="UpdateProfilePic" component={UpdateProfilePicScreen} options={{headerShown: false}} />
       <Stack.Screen name="UserSearch" component={UserSearchScreen} options={{headerShown: false}} />
       <Stack.Screen name="CreateGroup" component={CreateGroupScreen} options={{headerShown: false}} />
+      <Stack.Screen name="SingleChat" component={SingleChatScreen} options={{headerShown: false}} />
+      <Stack.Screen name="GroupChat" component={GroupChatScreen} options={{headerShown: false}} />
     </Stack.Navigator>
   );
 };

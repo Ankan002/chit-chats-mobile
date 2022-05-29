@@ -5,6 +5,7 @@ import { useRecoilValue } from "recoil";
 import { isDarkModeAtom } from "../../atom";
 import { StatusBar } from "expo-status-bar";
 import ChatHeader from "../../components/ChatHeader";
+import ChatsSection from "../../components/ChatsSection";
 
 const Home = () => {
   const isDarkMode = useRecoilValue<boolean>(isDarkModeAtom);
@@ -17,6 +18,11 @@ const Home = () => {
     >
       <StatusBar style={ isDarkMode ? "light" : "dark" } />
       <ChatHeader isDarkMode={isDarkMode} chatType="personal" />
+      <View
+        style={isDarkMode ? darkStyles.MainBody : lightStyles.MainBody}
+      >
+        <ChatsSection type="single-chat" />
+      </View>
     </SafeAreaView>
   );
 };

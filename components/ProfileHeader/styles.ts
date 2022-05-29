@@ -9,6 +9,7 @@ const styles = (isDarkMode: boolean) => {
             alignItems: "center"
         },
         ProfilePictureContainer: {
+            //TODO: Might think of making this a constant size
             width: "40%",
             height: "50%"
         },

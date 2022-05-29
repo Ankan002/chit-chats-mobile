@@ -29,7 +29,6 @@ export const fetchUser = async(
     }
     catch(error: any){
         setUserLoading(false);
-        toastMessage("error", "Fatal Error", "Internal Server Error!!");
         await AsyncStorage.removeItem("auth-token");
         return {
             success: false,
