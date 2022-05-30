@@ -17,13 +17,13 @@ const Profile = () => {
 
   const loggedInUser = useRecoilValue<UserType>(userAtom);
   const [currentUser, setCurrentUser] = useState<UserType>({});
+  const [isConnecting, setIsConnecting] = useState(false);
 
   useEffect(() => {
     if (!user) return;
 
     setCurrentUser(user);
 
-    //TODO: Perform loading of user and show activity indicator if the user is not the same
   }, [user]);
 
   return (
@@ -32,7 +32,7 @@ const Profile = () => {
         isDarkMode ? darkStyles.AndroidSafeArea : lightStyles.AndroidSafeArea
       }
     >
-      <NavigationHeader loading={false} />
+      <NavigationHeader loading={isConnecting} />
       {Object.keys(currentUser).length > 0 && (
         <View
           style={isDarkMode ? darkStyles.PageSection : lightStyles.PageSection}
@@ -53,6 +53,8 @@ const Profile = () => {
               tagline={currentUser.tagline ?? ""}
               loggedInUserId={loggedInUser._id ?? ""}
               idQueried={currentUser._id ?? ""}
+              isConnecting={isConnecting}
+              setIsConnecting={setIsConnecting}
             />
           </View>
         </View>

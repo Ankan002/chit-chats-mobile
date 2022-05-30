@@ -26,7 +26,9 @@ const linking: LinkingOptions<RootStackParamList> = {
       UpdateTagline: '*',
       UpdateProfilePic: '*',
       UserSearch: '*',
-      CreateGroup: '*'
+      CreateGroup: '*',
+      GroupChat: '*',
+      SingleChat: '*'
     },
   },
 };

@@ -22,6 +22,8 @@ export type RootStackParamList = {
   UpdateProfilePic: undefined;
   UserSearch: undefined;
   CreateGroup: undefined;
+  SingleChat: undefined;
+  GroupChat: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<
@@ -56,13 +58,47 @@ export type UserType = {
 }
 
 export type SearchedUserType = {
-  __v?: number,
-  _id?: string,
-  name?: string,
-  username?: string,
-  email?: string,
-  image?: string,
-  tagline?: string,
-  createdAt?: string,
-  updatedAt?: string
+  __v?: number;
+  _id?: string;
+  name?: string;
+  username?: string;
+  email?: string;
+  image?: string;
+  tagline?: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export type LatestMessageType = {
+  __v: number;
+  _id: string;
+  sender: string;
+  content: string;
+  chat: string;
+  media?: string;
+  replyingTo?: string;
+}
+
+export type SingleChatType = {
+  __v?: number;
+  _id?: string;
+  chatName: string;
+  isGroupChat: boolean;
+  createdAt: string;
+  updatedAt: string;
+  users: Array<SearchedUserType>;
+  latestMessage?: LatestMessageType;
+}
+
+export type GroupChatType = {
+  __v?: number;
+  _id: string;
+  chatName: string;
+  isGroupChat: boolean;
+  createdAt: string;
+  updatedAt: string;
+  users: Array<SearchedUserType>;
+  groupAdmin: SearchedUserType;
+  groupImage: string;
+  latestMessage?: LatestMessageType
 }
