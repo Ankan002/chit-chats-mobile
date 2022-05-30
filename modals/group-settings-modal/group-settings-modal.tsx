@@ -1,4 +1,4 @@
-import { View, Text, Modal } from "react-native";
+import { View, Text, Modal, FlatList } from "react-native";
 import React, { useState } from "react";
 import { lightStyles, darkStyles } from "./styles";
 import { useRecoilValue } from "recoil";
@@ -7,8 +7,10 @@ import { GroupChatType, UserType } from "../../types";
 import { toastMessage } from "../../helpers/toast-message/toast-message";
 import { userAtom } from "../../atom/userAtom";
 import AsyncModalNavigationHeader from "../../components/AsyncModalNavigationHeader";
+import GroupSettingsBody from "../../components/GroupSettingsBody";
 import Toast from "react-native-toast-message";
 import GroupSettingsHeader from "../../components/GroupSettingsHeader";
+import LeaveGroupSection from "../../components/LeaveGroupSection";
 
 interface Props {
   isModalVisible: boolean;
@@ -23,6 +25,7 @@ const GroupSettingsModal = (props: Props) => {
   const isDarkMode = useRecoilValue<boolean>(isDarkModeAtom);
   const [isRemovingUser, setIsRemovingUser] = useState<boolean>(false);
   const loggedInUser = useRecoilValue<UserType>(userAtom);
+  const [isLeavingGroup, setIsLeavingGroup] = useState<boolean>(false);
 
   const onRequestModalClose = () => {
     if (isRemovingUser) {
@@ -62,6 +65,8 @@ const GroupSettingsModal = (props: Props) => {
           groupChat={groupChat}
           setGroupChat={setGroupChat}
         />
+        <GroupSettingsBody groupChat={groupChat} setGroupChat={setGroupChat} isRemovingUser={isRemovingUser} setIsRemovingUser={setIsRemovingUser} />
+        <LeaveGroupSection isLeavingGroup={isLeavingGroup} setIsLeavingGroup={setIsLeavingGroup} group={groupChat} />
       </View>
       <Toast />
     </Modal>

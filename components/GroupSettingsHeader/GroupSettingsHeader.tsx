@@ -7,6 +7,7 @@ import { useFonts, FiraCode_500Medium } from "@expo-google-fonts/fira-code";
 import { Manrope_600SemiBold } from "@expo-google-fonts/manrope";
 import { EvilIcons } from "@expo/vector-icons";
 import UpdateGroupNameModal from "../../modals/update-group-name-modal";
+import UpdateGroupImageModal from "../../modals/update-group-image-modal";
 import { GroupChatType } from "../../types";
 
 interface Props {
@@ -25,10 +26,16 @@ const GroupSettingsHeader = (props: Props) => {
 
   const [isUpdateGroupNameModalVisible, setIsUpdateGroupNameModalVisible] =
     useState<boolean>(false);
+  const [isUpdateGroupImageModalVisible, setIsUpdateGroupImageModalVisible] =
+    useState<boolean>(false);
 
   const onUpdateGroupNameButtonClick = () => {
     setIsUpdateGroupNameModalVisible(true);
   };
+
+  const onUpdateGroupImageButtonClick = () => {
+    setIsUpdateGroupImageModalVisible(true);
+  }
 
   return (
     <View
@@ -60,6 +67,7 @@ const GroupSettingsHeader = (props: Props) => {
               ? darkStyles.EditImageButton
               : lightStyles.EditImageButton
           }
+          onPress={onUpdateGroupImageButtonClick}
         >
           {fontsLoaded && (
             <Text
@@ -152,6 +160,7 @@ const GroupSettingsHeader = (props: Props) => {
             groupChat={groupChat}
             setGroupChat={setGroupChat}
           />
+          <UpdateGroupImageModal isModalVisible={isUpdateGroupImageModalVisible} setIsModalVisible={setIsUpdateGroupImageModalVisible} groupChat={groupChat} setGroupChat={setGroupChat} />
         </View>
       )}
     </View>

@@ -4,7 +4,7 @@ const styles = (isDarkMode: boolean) => {
     return StyleSheet.create({
         HeaderContainer: {
             width: "100%",
-            height: "35%",
+            height: "39%",
             justifyContent: "center",
             alignItems: "center"
         },
@@ -34,11 +34,11 @@ const styles = (isDarkMode: boolean) => {
             fontFamily: "FiraCode_500Medium",
         },
         NonAdminGroupName: {
-            fontSize: 16,
+            fontSize: 18,
             color: (isDarkMode) ? "#FFFFFF" : "#141125",
             textAlign: "center",
             fontFamily: "Manrope_600SemiBold",
-            marginTop: 5
+            marginTop: 10
         },
         AdminGroupNameSection: {
             width: "100%",

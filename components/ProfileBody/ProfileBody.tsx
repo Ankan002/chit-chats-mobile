@@ -19,6 +19,7 @@ import { singleChatsAtom } from "../../atom/singleChatsAtom"
 import { FiraCode_500Medium } from "@expo-google-fonts/fira-code";
 import { SingleChatType } from "../../types";
 import { toastMessage } from '../../helpers/toast-message/toast-message';
+import { useNavigation } from "@react-navigation/core";
 import { isUserConnected } from '../../helpers/is-user-connected/is-user-connected';
 
 interface Props {
@@ -47,29 +48,26 @@ const ProfileBody = (props: Props) => {
   });
   const isDarkMode = useRecoilValue<boolean>(isDarkModeAtom);
   const [singleChats, setSingleChats] = useRecoilState<Array<SingleChatType>>(singleChatsAtom);
+  const navigation = useNavigation<any>();
 
   const onConnectClick = async() => {
     const response = await accessSingleChat(props.idQueried, isConnecting, setIsConnecting);
-
-    console.log(response)
 
     if(response.success === false){
       toastMessage("error", "Error", response.error);
       return;
     }
 
-    //TODO: Check and update the chat in single chats section.
-
     const isUserAlreadyConnected = isUserConnected(singleChats, response.chat._id);
 
     if(isUserAlreadyConnected){
-      //TODO: Navigate user to the new chatting screen
+      navigation.navigate("SingleChat", {chat: response.chat});
       return;
     }
 
     setSingleChats([response.chat, ...singleChats]);
 
-    //TODO: Navigate user to the new chatting screen
+    navigation.navigate("SingleChat", {chat: response.chat});
   };
 
   return (

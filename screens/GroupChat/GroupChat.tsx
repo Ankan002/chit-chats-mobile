@@ -18,8 +18,6 @@ const GroupChat = () => {
   const router = useRoute<any>();
   const {chat} = router.params;
 
-  //TODO: Create chat settings modal
-
   useEffect(() => {
     if(!chat) return;
 

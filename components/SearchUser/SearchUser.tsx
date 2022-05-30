@@ -6,7 +6,6 @@ import {
   FlatList,
   Image,
   ActivityIndicator,
-  SectionList,
 } from "react-native";
 import React, { useState } from "react";
 import { useRecoilValue } from "recoil";
@@ -17,6 +16,7 @@ import UserSearchResult from "../UserSearchResult";
 import { Feather } from "@expo/vector-icons";
 import { SearchedUserType } from "../../types";
 import { toastMessage } from "../../helpers/toast-message";
+import { serializeAddSearchedUser } from "../../helpers/serialize-add-searched-user";
 import { searchUser } from "../../helpers/search-users";
 
 const EmptyImage = require("../../assets/images/empty_search.png");
@@ -31,12 +31,23 @@ type Props =
       type: "group";
       searchResult: Array<SearchedUserType>;
       setSearchResult: Function;
-      action: "create" | "update" | "search";
+      action: "create" | "search";
       selectedUserIdSet: Set<string>;
       setSelectedUserIdSet: Function;
       setSelectedUsers: Function;
       selectedUsers: Array<SearchedUserType>;
-    };
+    }
+    | {
+        type: "group";
+        searchResult: Array<SearchedUserType>;
+        setSearchResult: Function;
+        action: "update";
+        selectedUserIdSet: Set<string>;
+        setSelectedUserIdSet: Function;
+        setSelectedUsers: Function;
+        selectedUsers: Array<SearchedUserType>;
+        groupUsers: Array<SearchedUserType>;
+      };
 
 interface FlatListProps {
   index: number;
@@ -80,7 +91,17 @@ const SearchUser = (props: Props) => {
       }
     }
 
-    if (props.type === "group") {
+    if (props.type === "group" && props.action === "update") {
+      const updatedSearchUserResult = serializeAddSearchedUser(props.groupUsers, response?.users);
+
+      props.setSearchResult(updatedSearchUserResult);
+
+      if (updatedSearchUserResult.length < 1) {
+        setEmptyStatement("No users found with that keyword");
+      }
+    }
+
+    if (props.type === "group" && props.action !== "update") {
       props.setSearchResult(response?.users);
 
       if (response?.users.length < 1) {

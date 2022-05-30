@@ -24,7 +24,6 @@ const Profile = () => {
 
     setCurrentUser(user);
 
-    //TODO: Perform loading of user and show activity indicator if the user is not the same
   }, [user]);
 
   return (

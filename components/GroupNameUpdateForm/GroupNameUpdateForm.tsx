@@ -69,8 +69,6 @@ const GroupNameUpdateForm = (props: Props) => {
       return;
     }
 
-    console.log(newGroupName);
-
     updateGroupNameInState(
       currentGroupChat._id,
       newGroupName,
@@ -84,6 +82,8 @@ const GroupNameUpdateForm = (props: Props) => {
     });
 
     setNewGroupName("");
+
+    toastMessage("success", "Yeah...", "Group Name Updated...");
 
     setIsModalVisible(!isModalVisible);
   };

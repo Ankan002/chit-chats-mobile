@@ -15,6 +15,7 @@ import SelectedGroupUser from "../SelectedGroupUser";
 import { createGroup } from "../../helpers/create-group";
 import { toastMessage } from "../../helpers/toast-message";
 import { userAtom } from "../../atom/userAtom";
+import { useNavigation } from "@react-navigation/core";
 import { groupChatsAtom } from "../../atom/groupChatsAtom";
 
 interface FlatListProps {
@@ -48,6 +49,7 @@ const CreateGroup = () => {
   const [isCreating, setIsCreating] = useState<boolean>(false);
   const loggedInUser = useRecoilValue<UserType>(userAtom);
   const [groupChats, setGroupChats] = useRecoilState<Array<GroupChatType>>(groupChatsAtom);
+  const navigation = useNavigation<any>();
 
   const onCreateClick = async() => {
     const response = await createGroup(isCreating, setIsCreating, currentImage, groupName, [...selectedUserIdSet]);
@@ -89,12 +91,12 @@ const CreateGroup = () => {
 
     setGroupChats([updatedGroup, ...groupChats]);
 
-
-    //TODO: CleanUp here and also redirect to the chat screen
     setGroupName("");
     setCurrentImage(null);
     setSelectedUsers([]);
     setSelectedUserIdSet(new Set());
+
+    navigation.navigate("GroupChat", {chat: updatedGroup})
   }
 
   return (
