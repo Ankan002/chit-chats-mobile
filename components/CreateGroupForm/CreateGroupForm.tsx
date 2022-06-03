@@ -54,10 +54,8 @@ const CreateGroup = () => {
   const onCreateClick = async() => {
     const response = await createGroup(isCreating, setIsCreating, currentImage, groupName, [...selectedUserIdSet]);
 
-    console.log(response);
-
     if(!response.success){
-      toastMessage("error", "Error Occurred", response.error);
+      toastMessage("error", "Error Occurred", `${response.error}`);
       return;
     }
 

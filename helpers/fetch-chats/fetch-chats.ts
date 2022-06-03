@@ -20,8 +20,6 @@ export const fetchChats = async(isChatsLoading: boolean, setIsChatsLoading: Func
             }
         });
 
-        // console.log(chats.data);
-
         setIsChatsLoading(false);
 
         return {

@@ -55,8 +55,6 @@ export const createGroup = async (
 
     const token = await AsyncStorage.getItem("auth-token");
 
-    console.log(Constants?.manifest?.extra?.apiEndpoint);
-
     const response = await fetch(
       `${Constants?.manifest?.extra?.apiEndpoint}/chat/group`,
       {

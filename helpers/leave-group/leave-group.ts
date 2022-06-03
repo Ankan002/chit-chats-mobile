@@ -33,8 +33,6 @@ export const leaveGroup = async(
             }
         });
 
-        console.log(response.data);
-
         setIsLeaving(false);
 
         return {

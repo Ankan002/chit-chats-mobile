@@ -23,8 +23,6 @@ export const searchUser = async (
 
         setSearching(false);
 
-        console.log(response.data.data.users);
-
         return {
             success: response.data.success,
             users: response.data.data.users

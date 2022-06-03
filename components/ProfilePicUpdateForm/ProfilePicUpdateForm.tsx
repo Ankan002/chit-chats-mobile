@@ -58,7 +58,7 @@ const ProfilePicUpdateForm = (props: Props) => {
     const response = await updateProfilePic(isUpdating, setIsUpdating, currentImage, user.image ?? "");
 
     if(!response?.success){
-        toastMessage("error", "Fatal Error", response?.error);
+        toastMessage("error", "Fatal Error", `{response?.error}`);
         setCurrentImage(null);
         return;
     }

@@ -6,6 +6,7 @@
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { Socket } from 'socket.io-client';
 
 declare global {
   namespace ReactNavigation {
@@ -132,7 +133,6 @@ export type FetchedMessageType = {
   replyingTo?: string;
   createdAt: string;
   updatedAt: string;
-  //TODO: Think twice on changing chat type to FetchedMessageChatType from string
   chat: string;
 }
 
@@ -156,4 +156,8 @@ export type SingleSentMessageType = {
   content: string;
   media?: string;
   chat: SingleChatType;
+}
+
+export type SocketInstance = {
+  socket?: Socket
 }

@@ -8,6 +8,7 @@ import AsyncModalNavigationHeader from "../../components/AsyncModalNavigationHea
 import Toast from "react-native-toast-message";
 import MediaMessageModalBody from "../../components/MediaMessageModalBody";
 import { lightStyles, darkStyles } from "./styles";
+import { Socket } from "socket.io-client";
 
 interface Props {
   chatId: string;
@@ -16,6 +17,7 @@ interface Props {
   setMessages: Function;
   isMediaMessageModalVisible: boolean;
   setIsMediaMessageModalVisible: Function;
+  socket: Socket | null;
 }
 
 const MediaMessageModal = (props: Props) => {
@@ -26,6 +28,7 @@ const MediaMessageModal = (props: Props) => {
     setMessages,
     isMediaMessageModalVisible,
     setIsMediaMessageModalVisible,
+    socket
   } = props;
 
   const isDarkMode = useRecoilValue<boolean>(isDarkModeAtom);
@@ -68,6 +71,7 @@ const MediaMessageModal = (props: Props) => {
           setIsMediaMessageModalVisible={setIsMediaMessageModalVisible}
           isSendingMediaMessage={isSendingMediaMessage}
           setIsSendingMediaMessage={setIsSendingMediaMessage}
+          socket={socket}
         />
       </View>
       <Toast />

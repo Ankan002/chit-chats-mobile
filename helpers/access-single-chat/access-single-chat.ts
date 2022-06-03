@@ -22,8 +22,6 @@ export const accessSingleChat = async(userId: string, isConnecting: boolean, set
         })
 
         setIsConnecting(false);
-    
-        console.log(chat.data);
 
         return {
             success: chat.data.success,

@@ -29,7 +29,6 @@ const styles = (isDarkMode: boolean) => {
             marginLeft: 10
         },
         ChatName: {
-            color: isDarkMode ? "#F6F8FA" : "#0A0911",
             fontSize: 16,
             fontFamily: "Manrope_700Bold"
         },

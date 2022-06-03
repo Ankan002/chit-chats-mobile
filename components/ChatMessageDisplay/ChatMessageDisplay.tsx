@@ -61,7 +61,6 @@ const styles = (props: Props) => {
     }
 
     if (!response.success) {
-      // toastMessage("error", "Hold on...", `${response.error}`);
       return;
     }
 
