@@ -3,6 +3,7 @@ import React from "react";
 import { darkStyles, lightStyles } from "./styles";
 import { isDarkModeAtom } from "../../atom/isDarkModeAtom";
 import { Manrope_700Bold, useFonts } from "@expo-google-fonts/manrope";
+import { currentChatAtom } from "../../atom/currentChatAtom";
 import { userAtom } from "../../atom";
 import { useRecoilValue, useRecoilState } from "recoil";
 import { groupChatsAtom } from "../../atom/groupChatsAtom";
@@ -25,6 +26,7 @@ const LeaveGroupSection = (props: Props) => {
 
   const userLoggedIn = useRecoilValue<UserType>(userAtom);
   const [groupChats, setGroupChats] = useRecoilState<Array<GroupChatType>>(groupChatsAtom);
+  const [currentSelectedChat, setCurrentSelectedChat] = useRecoilState<string | null>(currentChatAtom);
   const navigation = useNavigation();
 
   const onLeaveButtonClick = async() => {
@@ -41,6 +43,7 @@ const LeaveGroupSection = (props: Props) => {
 
       toastMessage("success", "Yeah...", `Successfully left ${group.chatName}`);
 
+      setCurrentSelectedChat(null);
       if(navigation.canGoBack()) navigation.goBack();
   }
 

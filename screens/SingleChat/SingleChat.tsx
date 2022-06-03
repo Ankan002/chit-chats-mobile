@@ -1,6 +1,7 @@
 import { View, Text } from "react-native";
 import React, { useState, useEffect } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useRecoilState } from "recoil";
+import { currentChatAtom } from "../../atom/currentChatAtom";
 import { isDarkModeAtom } from "../../atom/isDarkModeAtom";
 import { lightStyles, darkStyles } from "./styles";
 import ChatScreenNavigator from "../../components/ChatScreenNavigator";
@@ -9,6 +10,7 @@ import { SearchedUserType, SingleChatType, UserType } from "../../types";
 import { getSingleChatDisplayUser } from "../../helpers/get-chat-name-image";
 import { userAtom } from "../../atom";
 import UserModal from "../../modals/user-modal/user-modal";
+import ChatScreenBody from "../../components/ChatScreenBody";
 import ChatScreenHeader from "../../components/ChatScreenHeader";
 
 const SingleChat = () => {
@@ -19,6 +21,7 @@ const SingleChat = () => {
     useState<boolean>(false);
   const [displayUser, setDisplayUser] = useState<SearchedUserType>({});
   const loggedInUser = useRecoilValue<UserType>(userAtom);
+  const [currentSelectedChat, setCurrentSelectedChat] = useRecoilState<string | null>(currentChatAtom);
 
   const { chat } = router.params;
 
@@ -26,6 +29,7 @@ const SingleChat = () => {
     if (!chat) return;
 
     setCurrentChat(chat);
+    setCurrentSelectedChat(chat._id);
   }, [chat]);
 
   useEffect(() => {
@@ -50,6 +54,7 @@ const SingleChat = () => {
           type="single-chat-screen"
           isModalVisible={isProfileModalActive}
           setIsModalVisible={setIsProfileModalActive}
+          chatId={currentChat._id ?? ""}
         />
       )}
 
@@ -65,6 +70,8 @@ const SingleChat = () => {
         isModalVisible={isProfileModalActive}
         setIsModalVisible={setIsProfileModalActive}
       />
+
+      <ChatScreenBody chatId={currentChat?._id ?? ""} type="single" />
     </View>
   );
 };

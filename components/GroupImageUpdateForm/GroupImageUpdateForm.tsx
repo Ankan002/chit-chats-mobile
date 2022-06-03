@@ -60,7 +60,7 @@ const GroupImageUpdateForm = (props: Props) => {
     const response = await updateGroupImage(isUpdating, setIsUpdating, currentImage, currentGroupChat._id);
 
     if(!response.success){
-      toastMessage("error", "Update Failed", response.error);
+      toastMessage("error", "Update Failed", `${response.error}`);
       return;
     }
 
