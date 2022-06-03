@@ -50,7 +50,8 @@
     "react-native-screens": "~3.10.1",
     "react-native-toast-message": "^2.1.5",
     "react-native-web": "0.17.1",
-    "recoil": "^0.6.1"
+    "recoil": "^0.6.1",
+    "rn-emoji-keyboard": "^0.7.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

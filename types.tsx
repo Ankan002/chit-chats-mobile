@@ -102,3 +102,58 @@ export type GroupChatType = {
   groupImage: string;
   latestMessage?: LatestMessageType
 }
+
+export type FetchedMessageSenderType = {
+  _id: string;
+  name: string;
+  username: string;
+  image: string;
+}
+
+export type FetchedMessageChatType = {
+  __v: number;
+  _id: string;
+  chatName: string;
+  isGroupChat: string;
+  users: Array<string>;
+  groupAdmin: string;
+  groupImage: string;
+  createdAt: string;
+  updatedAt: string;
+  latestMessage?: string;
+}
+
+export type FetchedMessageType = {
+  __v: number;
+  _id: string;
+  sender: FetchedMessageSenderType;
+  content: string;
+  media?: string;
+  replyingTo?: string;
+  createdAt: string;
+  updatedAt: string;
+  //TODO: Think twice on changing chat type to FetchedMessageChatType from string
+  chat: string;
+}
+
+export type GroupSentMessageType = {
+  __v: number;
+  _id: string;
+  sender: FetchedMessageSenderType;
+  createdAt: string;
+  updatedAt: string;
+  content: string;
+  media?: string;
+  chat: GroupChatType;
+}
+
+export type SingleSentMessageType = {
+  __v: number;
+  _id: string;
+  sender: FetchedMessageSenderType;
+  createdAt: string;
+  updatedAt: string;
+  content: string;
+  media?: string;
+  chat: SingleChatType;
+}

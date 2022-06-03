@@ -6,8 +6,9 @@ import { userAtom } from "../../atom/userAtom";
 import { isDarkModeAtom } from "../../atom/isDarkModeAtom";
 import { darkStyles, lightStyles } from "./styles"
 import { Manrope_700Bold, Manrope_400Regular, useFonts } from "@expo-google-fonts/manrope";
+
 import { useNavigation } from '@react-navigation/core';
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useRecoilState } from "recoil";
 
 type Props = {
   type: "group-chat";
@@ -63,7 +64,6 @@ const SingleChat = (props: Props) => {
       >
         <Image
          source={{uri: chatImage}}
-         defaultSource={{uri: "https://i.pinimg.com/564x/c9/6c/30/c96c308f905434c7e2f33fa81b9c2763.jpg"}}
          style={isDarkMode ? darkStyles.ImageStyle : lightStyles.ImageStyle}
         />
       </View>

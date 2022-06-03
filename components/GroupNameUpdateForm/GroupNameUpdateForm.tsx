@@ -64,7 +64,7 @@ const GroupNameUpdateForm = (props: Props) => {
     );
 
     if (!response.success) {
-      toastMessage("error", "Error Occurred", response.error);
+      toastMessage("error", "Error Occurred", `${response.error}`);
 
       return;
     }

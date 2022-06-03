@@ -1,6 +1,7 @@
 import { View, Text, Pressable } from "react-native";
 import React from "react";
-import { useRecoilValue } from "recoil";
+import { currentChatAtom } from "../../atom/currentChatAtom";
+import { useRecoilValue, useRecoilState } from "recoil";
 import { Entypo, Ionicons, Feather } from "@expo/vector-icons";
 import { isDarkModeAtom } from "../../atom/isDarkModeAtom";
 import { lightStyles, darkStyles } from "./styles";
@@ -9,17 +10,21 @@ import { useNavigation } from "@react-navigation/core";
 interface Props {
   type: "group-chat-screen" | "single-chat-screen";
   setIsModalVisible: Function;
-  isModalVisible: boolean
+  isModalVisible: boolean;
+  chatId: string;
 }
 
 const ChatScreenNavigator = (props: Props) => {
   const { type, setIsModalVisible, isModalVisible } = props;
 
   const isDarkMode = useRecoilValue<boolean>(isDarkModeAtom);
+  const [currentSelectedChat, setCurrentSelectedChat] = useRecoilState<string | null>(currentChatAtom);
+
 
   const navigation = useNavigation();
 
   const onBackButtonClick = () => {
+    setCurrentSelectedChat(null);
     if (navigation.canGoBack()) navigation.goBack();
   };
 
