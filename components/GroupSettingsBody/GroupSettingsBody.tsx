@@ -24,8 +24,6 @@ interface UserFlatListProps {
 const GroupSettingsBody = (props: Props) => {
   const { groupChat, setGroupChat, isRemovingUser, setIsRemovingUser } = props;
 
-  console.log(groupChat);
-
   const isDarkMode = useRecoilValue<boolean>(isDarkModeAtom);
   const [isAddUserModalVisible, setIsAddUserModalVisible] =
     useState<boolean>(false);

@@ -54,7 +54,7 @@ const ProfileBody = (props: Props) => {
     const response = await accessSingleChat(props.idQueried, isConnecting, setIsConnecting);
 
     if(response.success === false){
-      toastMessage("error", "Error", response.error);
+      toastMessage("error", "Error", `${response.error}`);
       return;
     }
 

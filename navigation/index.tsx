@@ -3,15 +3,15 @@ import { FontAwesome } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 
-import { GroupChatType, RootStackParamList, RootTabParamList, SearchedUserType, SingleChatType, UserType } from '../types';
+import { GroupChatType, GroupSentMessageType, RootStackParamList, RootTabParamList, SearchedUserType, SingleChatType, SingleSentMessageType, SocketInstance, UserType } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import HomeScreen from '../screens/Home';
 import SettingsScreen from '../screens/Settings';
 import LoginScreen from '../screens/Login';
 import {isAuthenticatedAtom} from "../atom";
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { verifyIfAuthenticated } from '../helpers/verify-authenticated';
 import { isDarkModeAtom } from '../atom';
 import { getLastTheme } from '../helpers/is-dark-mode';
@@ -35,6 +35,12 @@ import { groupChatsAtom } from "../atom/groupChatsAtom";
 import { fetchChats } from "../helpers/fetch-chats";
 import { toastMessage } from '../helpers/toast-message/toast-message';
 import { serializeChats } from "../helpers/serialize-chats";
+import { Socket } from 'socket.io-client';
+import { initializeSocket, getSocket } from "../config";
+import { updateGroupChatsOnMessageSent, updateSingleChatsOnMessageSend } from '../helpers/send-message';
+import { notificationChatsAtom } from "../atom/notificationChatsAtom";
+import Constants from "expo-constants";
+import { currentChatAtom } from '../atom/currentChatAtom';
 
 export default function Navigation() {
 
@@ -86,6 +92,10 @@ function RootNavigator() {
   const [isChatsLoading, setIsChatsLoading] = useRecoilState<boolean>(chatsLoadingAtom);
   const [singleChats, setSingleChats] = useRecoilState<Array<SingleChatType>>(singleChatsAtom);
   const [groupChats, setGroupChats] = useRecoilState<Array<GroupChatType>>(groupChatsAtom);
+  const [connectedToSocket, setIsConnectedToSocket] = useState<boolean>(false);
+  const [notificationChats, setNotificationChats] = useRecoilState<Set<string>>(notificationChatsAtom);
+  const currentSelectedChat = useRecoilValue<string | null>(currentChatAtom);
+  const socket = getSocket();
 
   useEffect(() => {
     const onFetchUser = async() => {
@@ -96,13 +106,17 @@ function RootNavigator() {
       }
 
       setUser(fetchedUser.user);
+
+      const success = initializeSocket(fetchedUser.user);
+
+      setIsConnectedToSocket(success);
     };
 
     const onFetchChats = async() => {
       const response = await fetchChats(isChatsLoading, setIsChatsLoading);
 
       if(!response.success){
-        toastMessage("error", "Error Occurred", response.error);
+        toastMessage("error", "Error Occurred", `${response.error}`);
         return
       }
 
@@ -114,6 +128,22 @@ function RootNavigator() {
       onFetchChats();
     }
   }, [isAuthenticated]);
+
+  useEffect(() => {
+    socket?.on("message-received", (newMessage: GroupSentMessageType | SingleSentMessageType) => {
+      if(!currentSelectedChat || newMessage.chat._id !== currentSelectedChat){
+        if(newMessage.chat.isGroupChat){
+          updateGroupChatsOnMessageSent(newMessage as unknown as GroupSentMessageType, newMessage.chat._id || "", groupChats, setGroupChats);
+        }
+        else{
+          updateSingleChatsOnMessageSend(newMessage, newMessage.chat._id || "", singleChats, setSingleChats);
+        }
+        if(newMessage.chat._id && !notificationChats.has(newMessage.chat._id)){
+          setNotificationChats(new Set([newMessage.chat._id, ...notificationChats ]));
+        }
+      }
+    })
+  });
 
   return (
     <Stack.Navigator>

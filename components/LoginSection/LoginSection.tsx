@@ -31,7 +31,7 @@ const LoginSection = () => {
 
     if (!response.success) {
       // Alert.alert(response.error ?? "");
-      toastMessage("error", "Error Occurred", response?.error);
+      toastMessage("error", "Error Occurred", `${response?.error}`);
       setIsAuthenticating(false);
       return;
     }

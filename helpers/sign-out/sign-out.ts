@@ -6,6 +6,9 @@ import Constants from "expo-constants";
 export const signOut = async (
     setIsAuthenticated: Function,
     setUser: Function,
+    setGroupChats: Function,
+    setSingleChats: Function,
+    setNotificationChats: Function
 ) => {
     try{
         GoogleSignin.configure({
@@ -14,6 +17,9 @@ export const signOut = async (
 
         await GoogleSignin.signOut();
         await AsyncStorage.removeItem("auth-token");
+        setGroupChats([]);
+        setSingleChats([]);
+        setNotificationChats(new Set());
         setUser({});
         setIsAuthenticated(false);
     }

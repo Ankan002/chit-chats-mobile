@@ -76,10 +76,8 @@ const SearchUser = (props: Props) => {
 
     const response = await searchUser(isSearching, setIsSearching, keyword);
 
-    console.log(response);
-
     if (response?.success === false) {
-      toastMessage("error", "Oops!!", response.error);
+      toastMessage("error", "Oops!!", `${response.error}`);
       return;
     }
 

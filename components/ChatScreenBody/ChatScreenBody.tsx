@@ -22,9 +22,10 @@ import {
 } from "../../helpers/send-message";
 import ChatMessageDisplay from "../ChatMessageDisplay";
 import { useNavigation } from "@react-navigation/core";
-import { FetchedMessageType, GroupChatType, SingleChatType } from "../../types";
+import { FetchedMessageType, GroupChatType, GroupSentMessageType, SingleChatType, SingleSentMessageType } from "../../types";
 import MediaMessageModal from "../../modals/media-message-modal";
 import { toastMessage } from "../../helpers/toast-message";
+import { getSocket } from "../../config";
 
 interface Props {
   chatId: string;
@@ -32,8 +33,6 @@ interface Props {
 }
 
 const ChatScreenBody = (props: Props) => {
-  //TODO: Try implement a native emoji picker
-
   const { chatId, type } = props;
 
   const [fontsLoaded] = useFonts({
@@ -59,6 +58,7 @@ const ChatScreenBody = (props: Props) => {
     string | null
   >(currentChatAtom);
   const [isMediaMessageModalVisible, setIsMediaMessageModalVisible] = useState<boolean>(false);
+  const socket = getSocket()
 
   const navigation = useNavigation();
 
@@ -94,6 +94,8 @@ const ChatScreenBody = (props: Props) => {
     }
 
     setMessages(response.chatMessages);
+
+    socket?.emit("join-chat", chatId)
   };
 
   useEffect(() => {
@@ -158,8 +160,31 @@ const ChatScreenBody = (props: Props) => {
       ...messages,
     ]);
 
+    socket?.emit("new-message", response.message);
+
     setNewMessageContent("");
   };
+
+  useEffect(() => {
+    socket?.on("message-received", (newMessage: GroupSentMessageType | SingleSentMessageType) => {
+      if(currentSelectedChat && currentSelectedChat === newMessage.chat._id){
+        if(newMessage.chat.isGroupChat){
+          updateGroupChatsOnMessageSent(newMessage as unknown as GroupSentMessageType, chatId, groupChats, setGroupChats);
+        }
+        else{
+          updateSingleChatsOnMessageSend(newMessage, chatId, singleChats, setSingleChats);
+        }
+
+        setMessages([
+          {
+            ...newMessage,
+            chat: newMessage.chat._id
+          },
+          ...messages
+        ]);
+      }
+    });
+  });
 
   const onMediaMessageButtonClick = () => {
     if(isInitialLoading) return;
@@ -284,7 +309,7 @@ const ChatScreenBody = (props: Props) => {
         </Pressable>
       </View>
 
-      <MediaMessageModal isMediaMessageModalVisible={isMediaMessageModalVisible} setIsMediaMessageModalVisible={setIsMediaMessageModalVisible} messages={messages} setMessages={setMessages} chatId={chatId} type={type}  />
+      <MediaMessageModal isMediaMessageModalVisible={isMediaMessageModalVisible} setIsMediaMessageModalVisible={setIsMediaMessageModalVisible} messages={messages} setMessages={setMessages} chatId={chatId} type={type} socket={socket}  />
     </View>
   );
 };

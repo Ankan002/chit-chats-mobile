@@ -121,9 +121,6 @@ export const sendMediaMessage = async (
     formData.append("chatId", chatId);
     formData.append("content", content);
 
-    // console.log(Constants?.manifest?.extra?.apiEndpoint);
-    console.log(token);
-
     const response = await fetch(
       `${Constants?.manifest?.extra?.apiEndpoint}/message/media`,
       {
@@ -135,8 +132,6 @@ export const sendMediaMessage = async (
         body: formData,
       }
     );
-
-    console.log(`${JSON.stringify(response)}`);
 
     const data = await response.json();
 

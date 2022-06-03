@@ -19,6 +19,7 @@ import DocumentPicker, {
 import { lightStyles, darkStyles } from "./styles";
 import { groupChatsAtom } from '../../atom/groupChatsAtom';
 import { singleChatsAtom } from '../../atom/singleChatsAtom';
+import { Socket } from 'socket.io-client';
 
 interface Props{
   chatId: string;
@@ -27,12 +28,13 @@ interface Props{
   setMessages: Function;
   setIsMediaMessageModalVisible: Function;
   isSendingMediaMessage: boolean;
-  setIsSendingMediaMessage: Function
+  setIsSendingMediaMessage: Function;
+  socket: Socket | null;
 }
 
 const MediaMessageModalBody = (props: Props) => {
 
-  const {chatId, type, messages, setMessages, setIsMediaMessageModalVisible, setIsSendingMediaMessage, isSendingMediaMessage} = props;
+  const {chatId, type, messages, setMessages, setIsMediaMessageModalVisible, setIsSendingMediaMessage, isSendingMediaMessage, socket} = props;
 
   const [fontsLoaded] = useFonts({
     Manrope_600SemiBold,
@@ -67,7 +69,6 @@ const MediaMessageModalBody = (props: Props) => {
   };
 
   const onSendMessageClick = async () => {
-      //TODO: Complete the functionality here to join the last piece of the static jic-saw puzzle
 
       const response = await sendMediaMessage(isSendingMediaMessage, setIsSendingMediaMessage, selectedMedia, newMessageContent, chatId);
 
@@ -114,6 +115,8 @@ const MediaMessageModalBody = (props: Props) => {
         },
         ...messages,
       ]);
+
+      socket?.emit("new-message", response.message);
 
       setNewMessageContent("");
       setSelectedMedia(null);

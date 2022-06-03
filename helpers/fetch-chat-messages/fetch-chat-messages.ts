@@ -50,7 +50,6 @@ export const fetchInitialChats = async(
 
         if(data.data.chats.length < 15){
             setIsMoreMessagesAvailable(false);
-            console.log("Hit Here....");
         }
 
         setNextPage(nextPage + 1);
@@ -120,7 +119,6 @@ export const fetchMore = async(
 
         if(data.data.chats.length < 15){
             setIsMoreAvailable(false);
-            console.log("Hit Here....");
         }
 
         setNextPage(nextPage + 1);

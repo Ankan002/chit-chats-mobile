@@ -29,8 +29,6 @@ export const addGroupMembers = async(
             }
         });
 
-        console.log(response);
-
         setIsAddingUsers(false);
 
         return{

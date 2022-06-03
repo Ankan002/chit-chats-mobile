@@ -48,8 +48,6 @@ export const updateGroupImage = async(
 
         setIsUpdating(false);
 
-        console.log(data.data.image);
-
         return {
             success: true,
             image: data.data.image
