@@ -30,13 +30,15 @@ const styles = (isDarkMode: boolean) => {
         },
         ChatName: {
             fontSize: 16,
-            fontFamily: "Manrope_700Bold"
+            fontFamily: "Manrope_700Bold",
+            flexShrink: 1
         },
         ChatText: {
             color: isDarkMode ? "#F6F8FA" : "#0A0911",
             fontSize: 14,
             fontFamily: "Manrope_400Regular",
-            marginTop: 4
+            marginTop: 4,
+            flexShrink: 1
         }
     });
 };

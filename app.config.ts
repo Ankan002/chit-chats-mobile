@@ -2,7 +2,7 @@ import "dotenv/config";
 
 export default {
     expo: {
-        name: "chit-chats-mobile",
+        name: "Chit Chats",
         slug: "chit-chats-mobile",
         version: "1.0.0",
         orientation: "portrait",
@@ -12,7 +12,7 @@ export default {
         splash: {
             image: "./assets/images/splash.png",
             resizeMode: "contain",
-            backgroundColor: "#ffffff",
+            backgroundColor: "#10111A"
         },
         updates: {
             fallbackToCacheTimeout: 0,
@@ -49,6 +49,10 @@ export default {
             webClientId: process.env.WEB_CLIENT_ID,
             apiEndpoint: process.env.API_ENDPOINT,
             socketEndpoint: process.env.SOCKET_ENDPOINT
+        },
+        androidStatusBar: {
+            barStyle: "light-content",
+            backgroundColor: "#10111A"
         }
     },
 };

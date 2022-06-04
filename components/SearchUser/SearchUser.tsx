@@ -60,7 +60,7 @@ const SearchUser = (props: Props) => {
   const isDarkMode = useRecoilValue<boolean>(isDarkModeAtom);
   const [keyword, setKeyword] = useState<string>("");
   const [emptyStatement, setEmptyStatement] = useState<string>(
-    "Please search with email or username to get a result"
+    "Please search with username to get a result"
   );
   const [isSearching, setIsSearching] = useState<boolean>(false);
 
