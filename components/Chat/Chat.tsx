@@ -58,7 +58,7 @@ const SingleChat = (props: Props) => {
   const onChatClick = () => {
     if (chat._id && notificationChats.has(chat._id)) {
       setNotificationChats(
-        new Set([...notificationChats].filter((chatId) => chatId !== chatId))
+        new Set([...notificationChats].filter((id) => id !== chat._id))
       );
     }
     if (type === "single-chat") {

@@ -17,7 +17,7 @@ export default function App() {
     return (
       <RecoilRoot>
         <SafeAreaProvider>
-          <StatusBar style='dark' />
+          <StatusBar style='light' />
           <Navigation />
           <Toast />
         </SafeAreaProvider>
