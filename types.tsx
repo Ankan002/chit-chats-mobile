@@ -89,6 +89,7 @@ export type SingleChatType = {
   updatedAt: string;
   users: Array<SearchedUserType>;
   latestMessage?: LatestMessageType;
+  groupImage?: string;
 }
 
 export type GroupChatType = {

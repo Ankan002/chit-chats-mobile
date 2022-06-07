@@ -94,6 +94,7 @@ const ChatScreenBody = (props: Props) => {
     }
 
     setMessages(response.chatMessages);
+    setCurrentSelectedChat(chatId);
 
     socket?.emit("join-chat", chatId)
   };

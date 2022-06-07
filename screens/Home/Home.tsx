@@ -1,14 +1,23 @@
 import { View, Text, SafeAreaView } from "react-native";
-import React from "react";
+import React, {useEffect} from "react";
 import { lightStyles, darkStyles } from "./styles";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { isDarkModeAtom } from "../../atom";
 import { StatusBar } from "expo-status-bar";
 import ChatHeader from "../../components/ChatHeader";
 import ChatsSection from "../../components/ChatsSection";
+import { currentChatAtom } from "../../atom/currentChatAtom";
 
 const Home = () => {
   const isDarkMode = useRecoilValue<boolean>(isDarkModeAtom);
+  const [currentSelectedChat, setCurrentSelectedChat] = useRecoilState<
+    string | null
+    >(currentChatAtom);
+
+  useEffect(() => {
+    setCurrentSelectedChat(null);
+  }, []);
+
 
   return (
     <SafeAreaView

@@ -9,6 +9,7 @@ import Toast from "react-native-toast-message";
 import MediaMessageModalBody from "../../components/MediaMessageModalBody";
 import { lightStyles, darkStyles } from "./styles";
 import { Socket } from "socket.io-client";
+import { toastConfig } from "../../config";
 
 interface Props {
   chatId: string;
@@ -74,7 +75,7 @@ const MediaMessageModal = (props: Props) => {
           socket={socket}
         />
       </View>
-      <Toast />
+      <Toast config={toastConfig} />
     </Modal>
   );
 };

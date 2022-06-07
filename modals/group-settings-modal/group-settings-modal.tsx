@@ -11,6 +11,7 @@ import GroupSettingsBody from "../../components/GroupSettingsBody";
 import Toast from "react-native-toast-message";
 import GroupSettingsHeader from "../../components/GroupSettingsHeader";
 import LeaveGroupSection from "../../components/LeaveGroupSection";
+import { toastConfig } from "../../config";
 
 interface Props {
   isModalVisible: boolean;
@@ -68,7 +69,7 @@ const GroupSettingsModal = (props: Props) => {
         <GroupSettingsBody groupChat={groupChat} setGroupChat={setGroupChat} isRemovingUser={isRemovingUser} setIsRemovingUser={setIsRemovingUser} />
         <LeaveGroupSection isLeavingGroup={isLeavingGroup} setIsLeavingGroup={setIsLeavingGroup} group={groupChat} />
       </View>
-      <Toast />
+      <Toast config={toastConfig} />
     </Modal>
   );
 };

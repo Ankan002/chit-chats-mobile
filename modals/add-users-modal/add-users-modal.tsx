@@ -9,6 +9,7 @@ import AsyncModalNavigationHeader from '../../components/AsyncModalNavigationHea
 import TitleHeader from '../../components/TitleHeader';
 import AddUsersModalBody from "../../components/AddUsersModalBody";
 import { lightStyles, darkStyles } from "./styles";
+import { toastConfig } from "../../config";
 
 interface Props{
     isAddUsersModalVisible: boolean;
@@ -44,7 +45,7 @@ const AddUsersModal = (props: Props) => {
         <TitleHeader title="Add Users" />
         <AddUsersModalBody isAddUserModalVisible={isAddUsersModalVisible} setIsAddUserModalVisible={setIsAddUsersModalVisible} isAddingUsers={isAddingUsers} setIsAddingUsers={setIsAddingUsers} groupChat={groupChat} setGroupChat={setGroupChat} />
       </View>
-      <Toast />
+      <Toast config={toastConfig} />
     </Modal>
   )
 }
