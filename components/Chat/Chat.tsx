@@ -14,6 +14,7 @@ import {
 
 import { useNavigation } from "@react-navigation/core";
 import { useRecoilValue, useRecoilState } from "recoil";
+import { currentChatAtom } from "../../atom/currentChatAtom";
 
 type Props =
   | {
@@ -43,11 +44,14 @@ const SingleChat = (props: Props) => {
   const [notificationChats, setNotificationChats] = useRecoilState<Set<string>>(
     notificationChatsAtom
   );
+  const [currentSelectedChat, setCurrentSelectedChat] = useRecoilState<
+    string | null
+    >(currentChatAtom);
 
   useEffect(() => {
     if (type === "group-chat") {
       setChatName(chat.chatName);
-      setChatImage(chat.groupImage);
+      setChatImage(chat.groupImage ?? "");
     } else {
       const data = getChatNameAndImage(chat.users, loggedInUser._id ?? "");
       if (data?.chatImage) setChatImage(data.chatImage);

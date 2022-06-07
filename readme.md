@@ -1,8 +1,8 @@
-# <center>Chit Chats</center>
+# Chit Chats
 
-<img src="./assets/images/icon.png" style="height: 200px; width: 200px; display: block; margin-left: auto; margin-right: auto" />
+<img src="./assets/images/icon.png" style="height: 200px; width: 200px;" />
 
-### <p style="margin-top: 20px; margin-bottom: 30px">An app dedicated to help you to make fiends...</p>
+An app dedicated to help you to make fiends...
 
 ## Steps to get Started
 
@@ -28,15 +28,11 @@
 
 ## Some Screenshots
 
-<div style="display: flex; flex-wrap: wrap;">
+<img src="https://shorturl.at/epwO1" style="width: 100px;" />
 
-<img src="https://shorturl.at/epwO1" style="height: auto; width: 100px; margin: 20px 10px" />
+<img src="https://shorturl.at/dsKN3" style="width: 100px;" />
 
-<img src="https://shorturl.at/dsKN3" style="height: auto; width: 100px; margin: 20px 10px" />
-
-<img src="https://shorturl.at/oyE45" style="height: auto; width: 100px; margin: 20px 10px" />
-
-</div>
+<img src="https://shorturl.at/oyE45" style="width: 100px;" />
 
 <div style="margin-bottom: 30px;" ></div>
 

@@ -3,12 +3,13 @@ import React, { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { lightStyles, darkStyles } from "../group-settings-modal/styles";
 import { isDarkModeAtom } from "../../atom/isDarkModeAtom";
-import { toastMessage } from "../../helpers/toast-message/toast-message";
+import { toastMessage } from "../../helpers/toast-message";
 import AsyncModalNavigationHeader from "../../components/AsyncModalNavigationHeader";
 import TitleHeader from "../../components/TitleHeader";
 import Toast from "react-native-toast-message";
 import GroupNameUpdateForm from "../../components/GroupNameUpdateForm";
 import { GroupChatType } from "../../types";
+import { toastConfig } from "../../config";
 
 interface Props {
   isModalVisible: boolean;
@@ -72,7 +73,7 @@ const UpdateGroupNameModal = (props: Props) => {
           setCurrentGroupChat={setGroupChat}
         />
       </View>
-      <Toast />
+      <Toast config={toastConfig} />
     </Modal>
   );
 };

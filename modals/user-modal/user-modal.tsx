@@ -7,6 +7,8 @@ import { SearchedUserType } from "../../types";
 import ProfileHeader from '../../components/ProfileHeader';
 import SimpleModalNavigationHeader from '../../components/SimpleModalNavigationHeader';
 import ProfileModalBody from '../../components/ProfileModalBody/ProfileModalBody';
+import Toast from "react-native-toast-message";
+import { toastConfig } from "../../config";
 
 interface Props{
   user: SearchedUserType;
@@ -30,6 +32,8 @@ const UserModal = (props: Props) => {
         <ProfileHeader image={user.image ?? ""} username={user.username ?? ""} name={user.name ?? ""} />
         <ProfileModalBody email={user.email ?? ""} tagline={user.tagline ?? ""} />
       </View>
+
+      <Toast config={toastConfig} />
     </Modal>
   )
 }

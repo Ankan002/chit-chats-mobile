@@ -1,12 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { View } from "react-native";
 
 import useCachedResources from './hooks/useCachedResources';
 import Navigation from './navigation';
 
 import {RecoilRoot} from 'recoil';
 import Toast from "react-native-toast-message"
+import { toastConfig } from "./config";
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -19,7 +19,7 @@ export default function App() {
         <SafeAreaProvider>
           <StatusBar style='light' />
           <Navigation />
-          <Toast />
+          <Toast config={toastConfig} />
         </SafeAreaProvider>
       </RecoilRoot>
     );

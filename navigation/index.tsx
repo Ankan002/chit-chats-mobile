@@ -131,7 +131,7 @@ function RootNavigator() {
 
   useEffect(() => {
     socket?.on("message-received", (newMessage: GroupSentMessageType | SingleSentMessageType) => {
-      if(!currentSelectedChat || newMessage.chat._id !== currentSelectedChat){
+      if(!currentSelectedChat || newMessage.chat._id?.toString() !== currentSelectedChat?.toString()){
         if(newMessage.chat.isGroupChat){
           updateGroupChatsOnMessageSent(newMessage as unknown as GroupSentMessageType, newMessage.chat._id || "", groupChats, setGroupChats);
         }

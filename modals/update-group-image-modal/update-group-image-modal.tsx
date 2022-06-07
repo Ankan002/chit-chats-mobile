@@ -9,6 +9,7 @@ import AsyncModalNavigationHeader from "../../components/AsyncModalNavigationHea
 import Toast from "react-native-toast-message";
 import TitleHeader from "../../components/TitleHeader";
 import GroupImageUpdateForm from '../../components/GroupImageUpdateForm/GroupImageUpdateForm';
+import { toastConfig } from "../../config";
 
 interface Props {
   isModalVisible: boolean;
@@ -61,7 +62,7 @@ const UpdateGroupImageModal = (props: Props) => {
         <GroupImageUpdateForm isUpdating={isUpdating} setIsUpdating={setIsUpdating}
         currentGroupChat={groupChat} setCurrentGroupChat={setGroupChat} isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} />
       </View>
-      <Toast />
+      <Toast config={toastConfig} />
     </Modal>
   );
 };
