@@ -4,6 +4,8 @@
 
 An app dedicated to help you to make fiends...
 
+API: [Server Repository](https://github.com/Ankan002/chit-chats-backend)
+
 ## Steps to get Started
 
 - Install NodeJS.
